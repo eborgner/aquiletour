@@ -70,7 +70,7 @@ public class ValueResolver {
 
             value = Public.getInstance().getString(key);
 
-        } else if (Login.getInstance().hasString(key)) {
+        } else if (Login.getInstance() != null && Login.getInstance().hasString(key)) {
 
             value = Login.getInstance().getString(key);
 
