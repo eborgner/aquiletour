@@ -72,7 +72,7 @@ def generate_file_for_all_users(users_map, TEMPLATE_FILE):
 
             out = insert_values(user, _in)
 
-            out_filename = "%s/%s_%s" % (CONF_DIR,_id,TEMPLATE_FILE)
+            out_filename = "%s/%s_%s" % (CONF_DIR,_id,TEMPLATE_FILE.replace('.template','.json'))
 
             with codecs.open(out_filename, 'w', encoding='utf8') as out_file:
                 out_file.write(out)
@@ -122,7 +122,7 @@ def generate_apache_for_all_users(users_map):
 
                 out = generate_apache_server(apache_users, apache_server, login_port)
 
-                out_filename = "%s/%s.conf" % (CONF_DIR, SERVER_NAME)
+                out_filename = "%s/%s.conf" % (CONF_DIR, SERVER_NAME.replace('.ca',''))
 
                 with codecs.open(out_filename, 'w', encoding='utf8') as out_file:
                     out_file.write(out)
