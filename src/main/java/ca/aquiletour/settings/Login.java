@@ -18,11 +18,6 @@
 
 package ca.aquiletour.settings;
 
-import java.io.FileNotFoundException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
-import ca.aquiletour.Constants;
 import ca.aquiletour.http.HttpFetchListener;
 import ca.aquiletour.http.HttpOut;
 import ca.aquiletour.http.path.PrivatePath;
@@ -33,8 +28,6 @@ public class Login extends Dictionary {
 
     protected String loginCode;
     protected String studentToken;
-
-    private static Path path = Paths.get(Constants.CONF_DIR.toString(), Login.class.getSimpleName() + Constants.JSON_EXTENSION);
 
     private static Login instance;
 
@@ -53,9 +46,9 @@ public class Login extends Dictionary {
     public static void requestNewLoginInfo() {
 
 		String connectionString = String.format("http://localhost:%s/%s/%s/%s", 
-													Conf.getInstance().getPublicHttpPort(),
+													Public.getInstance().getPublicHttpPort(),
 													RoutePath.PRIVATE_PREFIX,
-													Conf.getInstance().getTeacherId(),
+													Teacher.getInstance().getTeacherId(),
 													PrivatePath.ACTION_NEXT_CODE);
 		
 		HttpOut.fetch(connectionString, new HttpFetchListener() {

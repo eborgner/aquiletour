@@ -21,10 +21,13 @@ package ca.aquiletour.http.responses;
 import java.util.HashMap;
 import java.util.Map;
 
-import ca.aquiletour.settings.Conf;
+import ca.aquiletour.settings.Lang;
 import ca.aquiletour.settings.Login;
 import ca.aquiletour.settings.Pages;
+import ca.aquiletour.settings.Private;
+import ca.aquiletour.settings.Public;
 import ca.aquiletour.settings.Strings;
+import ca.aquiletour.settings.Teacher;
 
 public class ValueResolver {
 
@@ -51,9 +54,21 @@ public class ValueResolver {
 
             value = localValues.get(key);
 
-        } else if (Conf.getInstance().hasString(key)) {
+        } else if (Lang.getInstance().hasString(key)) {
 
-            value = Conf.getInstance().getString(key);
+            value = Lang.getInstance().getString(key);
+
+        } else if (Teacher.getInstance().hasString(key)) {
+
+            value = Teacher.getInstance().getString(key);
+
+        } else if (Private.getInstance().hasString(key)) {
+
+            value = Private.getInstance().getString(key);
+
+        } else if (Public.getInstance().hasString(key)) {
+
+            value = Public.getInstance().getString(key);
 
         } else if (Login.getInstance().hasString(key)) {
 

@@ -34,7 +34,7 @@ import ca.aquiletour.http.routers.LoginRouter;
 import ca.aquiletour.http.routers.MainRouter;
 import ca.aquiletour.http.routers.PrivateRouter;
 import ca.aquiletour.http.routers.StaticRouter;
-import ca.aquiletour.settings.Conf;
+import ca.aquiletour.settings.Teacher;
 
 public class LoginAndTeacher implements HttpHandler {
 
@@ -75,7 +75,7 @@ public class LoginAndTeacher implements HttpHandler {
 	}
 
 	private boolean isTeacher(Path urlPath) {
-		return MainPath.ifTeacherIdEquals(urlPath, Conf.getInstance().getTeacherId());
+		return MainPath.ifTeacherIdEquals(urlPath, Teacher.getInstance().getTeacherId());
 	}
 
 	private Response routeStatic(HttpExchange exchange, Path urlPath) {

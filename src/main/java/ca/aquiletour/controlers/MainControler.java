@@ -40,13 +40,13 @@ import ca.aquiletour.filewatcher.FileWatcher;
 import ca.aquiletour.filewatcher.OnDeleteListener;
 import ca.aquiletour.filewatcher.OnModifyListener;
 import ca.aquiletour.messages.incoming.MsgAddComment;
-import ca.aquiletour.settings.Conf;
+import ca.aquiletour.settings.Lang;
 import ca.aquiletour.utils.Json;
 
 public class MainControler {
 	
 	
-    private static final Path studentsPath = Paths.get(Conf.getInstance().getStudents());
+    private static final Path studentsPath = Paths.get(Lang.getInstance().getStudentsFile());
 
     private static Map<String, Student> studentById = new HashMap<>();
     private static Map<String, Student> studentByAuthToken = new HashMap<>();

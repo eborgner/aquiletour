@@ -30,8 +30,9 @@ import com.google.common.collect.HashBiMap;
 import ca.aquiletour.http.HttpOut;
 import ca.aquiletour.http.path.PrivatePath;
 import ca.aquiletour.http.path.RoutePath;
-import ca.aquiletour.settings.Conf;
 import ca.aquiletour.settings.Login;
+import ca.aquiletour.settings.Public;
+import ca.aquiletour.settings.Teacher;
 import ca.aquiletour.utils.Digest;
 
 public class LoginControler {
@@ -42,7 +43,7 @@ public class LoginControler {
 
 	private static final Random seededRandom = new Random(System.currentTimeMillis());
 
-	private static final String token = Digest.digest(Conf.getInstance().getTeacherId() + String.format("%.10f", seededRandom.nextDouble()));
+	private static final String token = Digest.digest(Teacher.getInstance().getTeacherId() + String.format("%.10f", seededRandom.nextDouble()));
 	
 	private static String nextCodeNonUnique() {
 		int code = 1 + seededRandom.nextInt(9998);
@@ -94,9 +95,9 @@ public class LoginControler {
 
     public static void openQueue() {
 		String connectionString = String.format("http://localhost:%s/%s/%s/%s", 
-													Conf.getInstance().getPublicHttpPort(),
+													Public.getInstance().getPublicHttpPort(),
 													RoutePath.PRIVATE_PREFIX,
-													Conf.getInstance().getTeacherId(),
+													Teacher.getInstance().getTeacherId(),
 													PrivatePath.ACTION_OPEN);
 
 		HttpOut.send(connectionString);

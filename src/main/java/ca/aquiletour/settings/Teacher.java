@@ -25,65 +25,66 @@ import java.nio.file.Paths;
 import ca.aquiletour.Constants;
 import ca.aquiletour.utils.Json;
 
-public class Pages extends Dictionary {
+public class Teacher extends Dictionary {
 
-    protected String displayTickets;
-    protected String myTicket;
-    protected String error;
-    protected String login;
+    protected String teacherId;
+    protected String teacherName;
+    protected String teacherSurname;
+    protected String teacherToken;
 
-    private static Path path = Paths.get(Constants.LANG_DIR.toString(), Lang.getInstance().getLang(), Pages.class.getSimpleName() + Constants.JSON_EXTENSION);
+    private static Path path = Paths.get(Constants.CONF_DIR.toString(), Teacher.class.getSimpleName() + Constants.JSON_EXTENSION);
 
-    private static Pages instance;
+    private static Teacher instance;
 
-    public static Pages getInstance() {
+    public static Teacher getInstance() {
         return instance;
     }
 
     static {
+
         try {
 
-            instance = Json.fromJson(path, Pages.class);
-
+            instance = Json.fromJson(path, Teacher.class);
             instance.failIfSomeFieldIsNull();
 
         } catch (FileNotFoundException e) {
-
-            throw new RuntimeException("[FATAL] cannot read language file " + path.toString());
-
+            throw new RuntimeException("[FATAL] cannot read main conf file " + path.toString());
         }
+
     }
 
-    public String getMyTicket() {
-        return myTicket;
-    }
-
-    public void setMyTicket(String myTicket) {
-        this.myTicket = myTicket;
-    }
-
-    public String getDisplayTickets() {
-        return displayTickets;
-    }
-
-    public void setDisplayTickets(String displayTickets) {
-        this.displayTickets = displayTickets;
-    }
-
-	public String getError() {
-		return error;
+	public String getTeacherId() {
+		return teacherId;
 	}
 
-	public void setError(String error) {
-		this.error = error;
+	public void setTeacherId(String teacherId) {
+		this.teacherId = teacherId;
 	}
 
-	public String getLogin() {
-		return login;
+	public String getTeacherName() {
+		return teacherName;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
+	public void setTeacherName(String teacherName) {
+		this.teacherName = teacherName;
 	}
+
+	public String getTeacherSurname() {
+		return teacherSurname;
+	}
+
+	public void setTeacherSurname(String teacherSurname) {
+		this.teacherSurname = teacherSurname;
+	}
+
+	public String getTeacherToken() {
+		return teacherToken;
+	}
+
+	public void setTeacherToken(String teacherToken) {
+		this.teacherToken = teacherToken;
+	}
+    
+    
 
 }

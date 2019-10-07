@@ -25,65 +25,58 @@ import java.nio.file.Paths;
 import ca.aquiletour.Constants;
 import ca.aquiletour.utils.Json;
 
-public class Pages extends Dictionary {
+public class Public extends Dictionary {
 
-    protected String displayTickets;
-    protected String myTicket;
-    protected String error;
-    protected String login;
+    protected String serverName;
+    protected String publicHttpPort;
+    protected String publicWsPort;
 
-    private static Path path = Paths.get(Constants.LANG_DIR.toString(), Lang.getInstance().getLang(), Pages.class.getSimpleName() + Constants.JSON_EXTENSION);
+    private static Path path = Paths.get(Constants.CONF_DIR.toString(), Public.class.getSimpleName() + Constants.JSON_EXTENSION);
 
-    private static Pages instance;
+    private static Public instance;
 
-    public static Pages getInstance() {
+    public static Public getInstance() {
         return instance;
     }
 
     static {
+
         try {
 
-            instance = Json.fromJson(path, Pages.class);
-
+            instance = Json.fromJson(path, Public.class);
             instance.failIfSomeFieldIsNull();
 
         } catch (FileNotFoundException e) {
-
-            throw new RuntimeException("[FATAL] cannot read language file " + path.toString());
-
+            throw new RuntimeException("[FATAL] cannot read main conf file " + path.toString());
         }
+
     }
 
-    public String getMyTicket() {
-        return myTicket;
-    }
-
-    public void setMyTicket(String myTicket) {
-        this.myTicket = myTicket;
-    }
-
-    public String getDisplayTickets() {
-        return displayTickets;
-    }
-
-    public void setDisplayTickets(String displayTickets) {
-        this.displayTickets = displayTickets;
-    }
-
-	public String getError() {
-		return error;
+	public String getServerName() {
+		return serverName;
 	}
 
-	public void setError(String error) {
-		this.error = error;
+	public void setServerName(String serverName) {
+		this.serverName = serverName;
 	}
 
-	public String getLogin() {
-		return login;
+	public String getPublicHttpPort() {
+		return publicHttpPort;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
+	public void setPublicHttpPort(String publicHttpPort) {
+		this.publicHttpPort = publicHttpPort;
 	}
 
+	public String getPublicWsPort() {
+		return publicWsPort;
+	}
+
+	public void setPublicWsPort(String publicWsPort) {
+		this.publicWsPort = publicWsPort;
+	}
+    
+    
+    
 }
+   

@@ -31,12 +31,12 @@ import com.sun.net.httpserver.*;
 import ca.aquiletour.controlers.MainControler;
 import ca.aquiletour.controlers.WebSockets;
 import ca.aquiletour.http.connectors.LoginAndTeacher;
-import ca.aquiletour.settings.Conf;
 import ca.aquiletour.settings.Login;
+import ca.aquiletour.settings.Private;
 
 public class Main{
     
-    private static int httpPort = Conf.getInstance().getPrivateHttpPort();
+    private static int httpPort = Private.getInstance().getPrivateHttpPort();
     
     private static HttpServer httpServer;
     private static WebSockets webSocketServer;
@@ -117,7 +117,7 @@ public class Main{
 
 			webSocketServer = WebSockets.getInstance();
 
-			int webSocketPort = Conf.getInstance().getPrivateWsPort();
+			int webSocketPort = Private.getInstance().getPrivateWsPort();
 			
 			if(isPortUsed(webSocketPort)) {
 				

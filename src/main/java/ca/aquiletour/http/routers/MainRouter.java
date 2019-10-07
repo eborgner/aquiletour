@@ -32,9 +32,9 @@ import ca.aquiletour.http.responses.RedirectResponse;
 import ca.aquiletour.http.responses.Response;
 import ca.aquiletour.http.responses.TemplateResponse;
 import ca.aquiletour.http.responses.ValueResolver;
-import ca.aquiletour.settings.Conf;
 import ca.aquiletour.settings.Login;
 import ca.aquiletour.settings.Pages;
+import ca.aquiletour.settings.Teacher;
 
 public class MainRouter {
 
@@ -155,7 +155,7 @@ public class MainRouter {
 
     	if(authToken != null) {
 
-    		if(authToken.equals(Conf.getInstance().getTeacherToken())) {
+    		if(authToken.equals(Teacher.getInstance().getTeacherToken())) {
 
     			userIsAuthenticated = true;
 
@@ -174,7 +174,7 @@ public class MainRouter {
     }
 
     private static boolean userIsAllowedToDisplayAllTickets(Cookies cookies) {
-    	return Conf.getInstance().getTeacherToken().equals(cookies.getAuthToken());
+    	return Teacher.getInstance().getTeacherToken().equals(cookies.getAuthToken());
     }
 
     private static boolean shouldAskStudentName(Cookies cookies) {

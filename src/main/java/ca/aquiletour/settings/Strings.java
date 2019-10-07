@@ -50,7 +50,7 @@ public class Strings extends Dictionary {
     protected String reconnecting;
     protected String retryNow;
 
-	private static Path path = Paths.get(Constants.LANG_DIR.toString(), Conf.getInstance().getLang(), Strings.class.getSimpleName() + Constants.JSON_EXTENSION);
+	private static Path path = Paths.get(Constants.LANG_DIR.toString(), Lang.getInstance().getLang(), Strings.class.getSimpleName() + Constants.JSON_EXTENSION);
 
     private static Strings instance;
 

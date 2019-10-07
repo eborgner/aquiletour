@@ -28,7 +28,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import ca.aquiletour.Constants;
-import ca.aquiletour.settings.Conf;
+import ca.aquiletour.settings.Teacher;
 import ca.aquiletour.utils.Digest;
 import ca.aquiletour.utils.Json;
 
@@ -40,7 +40,7 @@ public class Ticket {
 	protected String comment;
 	
 	private static int ticketNum = 0;
-	private static String salt = Instant.now().getEpochSecond() + Conf.getInstance().getTeacherId();
+	private static String salt = Instant.now().getEpochSecond() + Teacher.getInstance().getTeacherId();
 
 	private static final String patternIdFromFileName = String.format("\\w+_\\w+_(\\w+)%s", Constants.JSON_EXTENSION);
     private static final Pattern ID_FROM_FILENAME = Pattern.compile(patternIdFromFileName, Pattern.UNICODE_CHARACTER_CLASS);

@@ -44,12 +44,13 @@ import ca.aquiletour.messages.outgoing.MsgDisplayComment;
 import ca.aquiletour.messages.outgoing.MsgRemoveDisplayedTicket;
 import ca.aquiletour.Constants;
 import ca.aquiletour.data.Ticket;
-import ca.aquiletour.settings.Conf;
 import ca.aquiletour.settings.Login;
+import ca.aquiletour.settings.Private;
+import ca.aquiletour.settings.Teacher;
 
 public class WebSockets extends WebSocketServer {
 	
-	private static WebSockets instance = new WebSockets(Conf.getInstance().getPrivateWsPort());
+	private static WebSockets instance = new WebSockets(Private.getInstance().getPrivateWsPort());
 
 	public static WebSockets getInstance() {return instance;}
 	
@@ -120,7 +121,7 @@ public class WebSockets extends WebSocketServer {
     }
     
     private void onRegisterTeacherSocket(MsgRegisterTeacherSocket message, WebSocket conn) {
-    	if(Conf.getInstance().getTeacherToken().equals(message.getAuthToken())) {
+    	if(Teacher.getInstance().getTeacherToken().equals(message.getAuthToken())) {
 			teacherSockets.add(conn);
 
 			MsgDisplayTicketsList display = new MsgDisplayTicketsList(MainControler.getTicketsList());
@@ -137,7 +138,7 @@ public class WebSockets extends WebSocketServer {
     }
 
     private void onCloseTicket(MsgCloseTicket message) {
-    	if(Conf.getInstance().getTeacherToken().equals(message.getAuthToken())) {
+    	if(Teacher.getInstance().getTeacherToken().equals(message.getAuthToken())) {
 			MainControler.deleteTicket(message.getTicketId());
     	}
     }

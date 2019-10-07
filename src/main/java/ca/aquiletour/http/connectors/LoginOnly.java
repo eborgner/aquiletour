@@ -36,7 +36,6 @@ import ca.aquiletour.http.routers.LoginRouter;
 import ca.aquiletour.http.routers.MainRouter;
 import ca.aquiletour.http.routers.PrivateRouter;
 import ca.aquiletour.http.routers.StaticRouter;
-import ca.aquiletour.settings.Conf;
 import ca.aquiletour.settings.Login;
 
 public class LoginOnly implements HttpHandler {

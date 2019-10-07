@@ -21,7 +21,6 @@ package ca.aquiletour.http.path;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import ca.aquiletour.settings.Conf;
 
 public class MainPath {
 	

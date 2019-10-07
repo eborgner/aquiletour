@@ -52,7 +52,7 @@ public class Constants {
     private static String HTML_DIRNAME = "html";
     public static Path HTML_DIR;
     
-    private static String LANG_DIRNAME = "i18n";
+    private static String LANG_DIRNAME = "lang";
     public static Path LANG_DIR;
 
     private static String TICKETS_DIRNAME;

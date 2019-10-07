@@ -19,11 +19,12 @@
 package ca.aquiletour.http.path;
 
 import java.nio.file.Path;
-import ca.aquiletour.settings.Conf;
+
+import ca.aquiletour.settings.Teacher;
 
 public class RoutePath {
 
-	private static final String USER_PREFIX = Conf.getInstance().getTeacherId();
+	private static final String USER_PREFIX = Teacher.getInstance().getTeacherId();
 	public static final String STATIC_PREFIX = "__static__";
     public static final String PRIVATE_PREFIX = "__private__";
 
