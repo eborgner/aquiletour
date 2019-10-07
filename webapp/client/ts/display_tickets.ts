@@ -75,7 +75,8 @@ function appendTicket(ticket, socket){
 
     $('#' + ticket.id).click(function(){
 
-            let authToken = Cookies.get('authToken');
+                            // @ts-ignore
+            const authToken = Cookies.get('authToken');
 
             let msgCloseTicket = new MsgCloseTicket(authToken, ticket.id);
             msgCloseTicket.send(socket);
@@ -156,6 +157,7 @@ $(document).ready(function(){
 
     function onOpen(webSocket:WebSocket){
 
+                              // @ts-ignore
             const authToken = Cookies.get('authToken');
 
             const msgRegisterMessage = new MsgRegisterTeacherSocket(authToken);

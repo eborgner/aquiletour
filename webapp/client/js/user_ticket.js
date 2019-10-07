@@ -1,3 +1,16 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 // Copyright (C) (2019) (Mathieu Bergeron) (mathieu.bergeron@cmontmorency.qc.ca)
 //
 // This file is part of aquiletour
@@ -14,11 +27,6 @@
 //
 // You should have received a copy of the GNU Affero General Public License
 // along with aquiletour.  If not, see <https://www.gnu.org/licenses/>
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
 var userByIdToAutocompleteSource = function (userById) {
     var source = [];
     for (var userId in userById) {
@@ -50,24 +58,6 @@ var deleteCookie = function (cookieId) {
     // @ts-ignore Cookies is from cookies-js
     Cookies.set(cookieId, "", { 'Expires': 'Sat 1 Jan 2000 00:00:00 GMT' });
 };
-var OutgoingMessage = (function () {
-    function OutgoingMessage() {
-        // @ts-ignore Seems to work fine on recent browsers
-        this._type = this.constructor.name;
-    }
-    OutgoingMessage.prototype.send = function (socket) {
-        socket.send(JSON.stringify(this));
-    };
-    return OutgoingMessage;
-})();
-var TicketMessage = (function (_super) {
-    __extends(TicketMessage, _super);
-    function TicketMessage(ticketId) {
-        _super.call(this);
-        this.ticketId = ticketId;
-    }
-    return TicketMessage;
-})(OutgoingMessage);
 // Copyright (C) (2019) (Mathieu Bergeron) (mathieu.bergeron@cmontmorency.qc.ca)
 //
 // This file is part of aquiletour
@@ -84,6 +74,25 @@ var TicketMessage = (function (_super) {
 //
 // You should have received a copy of the GNU Affero General Public License
 // along with aquiletour.  If not, see <https://www.gnu.org/licenses/>
+var OutgoingMessage = /** @class */ (function () {
+    function OutgoingMessage() {
+        // @ts-ignore Seems to work fine on recent browsers
+        this._type = this.constructor.name;
+    }
+    OutgoingMessage.prototype.send = function (socket) {
+        socket.send(JSON.stringify(this));
+    };
+    return OutgoingMessage;
+}());
+var TicketMessage = /** @class */ (function (_super) {
+    __extends(TicketMessage, _super);
+    function TicketMessage(ticketId) {
+        var _this = _super.call(this) || this;
+        _this.ticketId = ticketId;
+        return _this;
+    }
+    return TicketMessage;
+}(OutgoingMessage));
 var reconnectDelayInSeconds = 5;
 var stepDelayInSeconds = 1;
 var initialDelayInSeconds = 1;
@@ -155,28 +164,29 @@ function openSocket(connectionString, onOpen, onMessage) {
 /// <reference path="websocket_common.ts"/>
 // @ts-ignore Cookies is from cookies-js
 var ticketId = Cookies.get('ticketId');
-var MsgRegisterTicketSocket = (function (_super) {
+var MsgRegisterTicketSocket = /** @class */ (function (_super) {
     __extends(MsgRegisterTicketSocket, _super);
     function MsgRegisterTicketSocket() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     return MsgRegisterTicketSocket;
-})(TicketMessage);
-var MsgCloseTicket = (function (_super) {
+}(TicketMessage));
+var MsgCloseTicket = /** @class */ (function (_super) {
     __extends(MsgCloseTicket, _super);
     function MsgCloseTicket() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     return MsgCloseTicket;
-})(TicketMessage);
-var MsgAddComment = (function (_super) {
+}(TicketMessage));
+var MsgAddComment = /** @class */ (function (_super) {
     __extends(MsgAddComment, _super);
     function MsgAddComment(ticketId, comment) {
-        _super.call(this, ticketId);
-        this.comment = comment;
+        var _this = _super.call(this, ticketId) || this;
+        _this.comment = comment;
+        return _this;
     }
     return MsgAddComment;
-})(TicketMessage);
+}(TicketMessage));
 function adjustPosition(position) {
     var spanNumInQueue = $('#num-in-queue');
     spanNumInQueue.text(position);
