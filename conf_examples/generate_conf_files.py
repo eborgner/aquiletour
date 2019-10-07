@@ -21,17 +21,21 @@ import json
 import codecs
 
 if len(sys.argv) <= 5:
-    print "usage %s users_and_port.json apache.server apache.user apache.login Conf.template conf_dir" % sys.argv[0]
+    print "usage %s users_and_port.json apache.server apache.user apache.login Private.template Teacher.template conf_dir" % sys.argv[0]
     exit(0)
 
 INPUT_PATH = sys.argv[1]
 APACHE_SERVER = sys.argv[2]
 APACHE_USER = sys.argv[3]
-CONF_TEMPLATE = sys.argv[4]
-CONF_DIR = sys.argv[5]
+APACHE_LOGIN = sys.argv[4]
+PRIVATE_TEMPLATE = sys.argv[5]
+TEACHER_TEMPLATE = sys.argv[6]
+CONF_DIR = sys.argv[7]
 
 SERVER_NAME='aquiletour.ca'
-DEFAULT_HTTP_PORT=unicode(35001)
+PUBLIC_HTTP_PORT=unicode(80)
+
+PUBLIC_WS_PORT=unicode(80)
 
 OUTPUT_APACHE=CONF_DIR + "/aquiletour.conf"
 
@@ -49,8 +53,8 @@ def insert_values(user, template):
         line = line.replace("$privateHttpPort", str(user['privateHttpPort']))
         line = line.replace("$privateWsPort", str(user['privateWsPort']))
 
-        line = line.replace("$publicHttpPort", str(user['publicHttpPort']))
-        line = line.replace("$publicWsPort", str(user['publicWsPort']))
+        line = line.replace("$publicHttpPort", PUBLIC_HTTP_PORT)
+        line = line.replace("$publicWsPort", PUBLIC_WS_PORT)
         line = line.replace("$serverName", SERVER_NAME)
 
         result += line + '\n'
@@ -58,51 +62,80 @@ def insert_values(user, template):
     return result
 
 
-def apache_server_insert_values(apache_server, apache_users):
+def generate_file_for_all_users(users_map, TEMPLATE_FILE):
 
+    with codecs.open(TEMPLATE_FILE, encoding='utf8') as template_file:
+        _in  = template_file.read()
+
+        for _id in users_map:
+            user = users_map[_id]
+
+            out = insert_values(user, _in)
+
+            out_filename = "%s/%s_%s" % (CONF_DIR,_id,TEMPLATE_FILE)
+
+            with codecs.open(out_filename, 'w', encoding='utf8') as out_file:
+                out_file.write(out)
+                out_file.close()
+
+def generate_apacher_users(users_map, apache_user):
+    conf = ""
+
+    for _id in users_map:
+
+        if _id != "login":
+
+            user = users_map[_id]
+
+            out = insert_values(user, apache_user)
+
+            conf += "\n" + out
+
+    return conf
+
+def generate_apache_server(apache_users, apache_server, login_port):
     result = ""
 
     for line in apache_server.split('\n'):
 
         line = line.replace("@users", apache_users)
         line = line.replace("$serverName", SERVER_NAME)
-        line = line.replace("$httpPort", DEFAULT_HTTP_PORT)
+        line = line.replace("$httpPort", login_port)
 
         result += line + "\n"
 
     return result
 
+def generate_apache_for_all_users(users_map):
+    with codecs.open(APACHE_SERVER, encoding='utf8') as apache_server_file:
+        with codecs.open(APACHE_USER, encoding='utf8') as apache_user_file:
+            with codecs.open(APACHE_LOGIN, encoding='utf8') as apache_login_file:
+                apache_server = apache_server_file.read()
+                apache_user = apache_user_file.read()
+                apache_login = apache_login_file.read()
 
+                apache_users = generate_apacher_users(users_map, apache_user)
 
-def generate_files(users_map, apache_server, apache_user, conf_template):
+                apache_users += "\n" + insert_values(users_map['login'], apache_login)
 
-    apache_users = ""
+                login_port = unicode(users_map['login']['privateHttpPort'])
 
-    for _id in users_map:
-        user = users_map[_id]
+                out = generate_apache_server(apache_users, apache_server, login_port)
 
-        apache_this_user = insert_values(user, apache_user)
+                out_filename = "%s/%s.conf" % (CONF_DIR, SERVER_NAME)
 
-        apache_users += "\n" + apache_this_user
-
-        conf_this_user = insert_values(user, conf_template)
-
-        with codecs.open(CONF_DIR + '/%s.json' % _id , 'w', encoding='utf8') as conf_out:
-            conf_out.write(conf_this_user)
-
-    apache_server = apache_server_insert_values(apache_server, apache_users)
-
-    with codecs.open(OUTPUT_APACHE, 'w', encoding='utf8') as apache_server_out:
-        apache_server_out.write(apache_server)
-
+                with codecs.open(out_filename, 'w', encoding='utf8') as out_file:
+                    out_file.write(out)
+                    out_file.close()
 
 
 with codecs.open(INPUT_PATH, encoding='utf8') as input_file:
 
     users_map = json.loads(input_file.read())
 
-    with codecs.open(APACHE_SERVER, encoding='utf8') as apache_server_file:
-        with codecs.open(APACHE_USER, encoding='utf8') as apache_user_file:
-            with codecs.open(CONF_TEMPLATE, encoding='utf8') as conf_template_file:
+    generate_file_for_all_users(users_map, PRIVATE_TEMPLATE)
+    generate_file_for_all_users(users_map, TEACHER_TEMPLATE)
 
-                generate_files(users_map, apache_server_file.read(), apache_user_file.read(), conf_template_file.read())
+    generate_apache_for_all_users(users_map)
+
+

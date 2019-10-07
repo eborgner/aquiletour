@@ -1,5 +1,0 @@
-{
-    "serverName"      :  "$serverName",
-    "publicHttpPort"  :  "$publicHttpPort",
-    "publicWsPort"    :  "$publicWsPort"
-}
