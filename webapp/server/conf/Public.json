@@ -1,5 +1,0 @@
-{
-    "serverName"      :  "localhost",
-    "publicHttpPort"  :  "1024",
-    "publicWsPort"    :  "1025"
-}
