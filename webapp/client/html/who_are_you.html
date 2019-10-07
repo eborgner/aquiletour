@@ -1,0 +1,66 @@
+<!-- Copyright (C) (2019) (Mathieu Bergeron) (mathieu.bergeron@cmontmorency.qc.ca)
+
+This file is part of aquiletour
+
+aquiletour is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+aquiletour is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with aquiletour.  If not, see <https://www.gnu.org/licenses/> -->
+
+
+<div class="container">
+    <div class="row">
+        <div class="one-half column">
+
+            <h1>$whoAreYou</h1>
+
+            <div class="ui-widget">
+                <input class="u-full-width" id="who-are-you" value="">
+                <button id="button-its-me" class="button-primary">$itsMe</button>
+            </div>
+  </div>
+</div>
+</div>
+<script>
+
+var selectedStudentId = null;
+
+$(document).ready(function(){
+
+    // remove what firefox auto-inserts
+    $('#who-are-you').val("");
+
+    $('#button-its-me').attr('disabled', true);
+
+    var studentById = $studentById;
+
+    installAutocomplete('who-are-you', studentById, function(selectedId){
+
+            if(studentById[selectedId] !== undefined){
+
+                selectedStudentId = selectedId;
+                $('#button-its-me').attr('disabled', false);
+
+            }
+    });
+
+});
+
+$('#button-its-me').click(function(){
+
+    Cookies.set('studentId', selectedStudentId, {'Max-Age': maxCookieAge});
+    location.reload();
+
+});
+
+</script>
+
+

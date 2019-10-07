@@ -1,0 +1,10 @@
+{
+    "lang"            :  "fr",
+    "user"            :  "$user",
+    "authToken"       :  "$authToken",
+    "serverName"      :  "$serverName",
+    "httpPort"        :  "$httpPort",
+    "webSocketPort"   :  "$webSocketPort",
+    "students"        :  "students.json",
+    "teachers"        :  "teachers.json"
+}

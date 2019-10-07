@@ -1,0 +1,6 @@
+    RewriteCond %{HTTP:Connection} Upgrade [NC]
+    RewriteCond %{HTTP:Upgrade} websocket [NC]
+    RewriteRule /$user/(.*) ws://localhost:$webSocketPort/$1  [P,L]
+
+    ProxyPass /$user http://localhost:$httpPort/$user
+    ProxyPassReverse /$user http://localhost:$httpPort/$user

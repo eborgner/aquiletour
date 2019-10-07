@@ -1,0 +1,46 @@
+<!-- Copyright (C) (2019) (Mathieu Bergeron) (mathieu.bergeron@cmontmorency.qc.ca)
+
+This file is part of aquiletour
+
+aquiletour is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+aquiletour is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with aquiletour.  If not, see <https://www.gnu.org/licenses/> -->
+
+
+<div id="reconnecting" class="container" style="display:none;margin-top:12px">
+    <span style="padding:20px;">
+        $reconnecting<span id="reconnecting-in" style="display:inline-block;width:20px;padding:20px;">5</span> 
+        <button id="button-retry-now" class="button-primary">$retryNow</button>
+    </span>
+</div>
+
+<div class="container">
+            <h1>$serverName/$teacherId</h1>
+            <h3>code: $loginCode</h3>
+
+<table class="u-full-width">
+  <thead>
+    <tr>
+      <th>$position</th>
+      <th>$student</th>
+      <th>$comment</th>
+    </tr>
+  </thead>
+  <tbody id='tickets-tbody'>
+  </tbody>
+</table>
+</div>
+
+<input id="connection-string" style="display:none;" value="ws://$serverName:$publicWsPort/$teacherId"/>
+
+<script src="/$teacherId/__static__/js/websocket_common.js"></script>
+<script src="/$teacherId/__static__/js/display_tickets.js"></script>

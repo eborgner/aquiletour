@@ -1,0 +1,10 @@
+{
+    "lang"            :  "fr",
+    "user"            :  "mbergeron",
+    "authToken"       :  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "serverName"      :  "localhost",
+    "httpPort"        :  "1024",
+    "webSocketPort"   :  "1025",
+    "students"        :  "students.json",
+    "teachers"        :  "teachers.json"
+}

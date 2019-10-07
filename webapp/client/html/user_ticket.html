@@ -1,0 +1,47 @@
+<!-- Copyright (C) (2019) (Mathieu Bergeron) (mathieu.bergeron@cmontmorency.qc.ca)
+
+This file is part of aquiletour
+
+aquiletour is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+aquiletour is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with aquiletour.  If not, see <https://www.gnu.org/licenses/> -->
+
+<div id="reconnecting" class="container" style="display:none;margin-top:12px">
+    <span style="padding:20px;">
+        $reconnecting <span id="reconnecting-in" style="display:inline-block;width:20px;padding:20px;">5</span> 
+        <button id="button-retry-now" class="button-primary">$retryNow</button>
+    </span>
+</div>
+
+<div class="container">
+    <div class="row" style="margin-top:12px;">
+        <div class="twelve columns">
+            <h3>$youAre <span id='num-in-queue-msg'>#<span id='num-in-queue'>$numInQueue</span></span></h3>
+            <label for="button-close-ticket" >($studentName $studentSurname @ $teacherName $teacherSurname)</label>
+            <button id="button-close-ticket" class="button-primary aqui-button" style="margin-top:12px;">$closeTicket</button>
+        </div>
+    <div class="row">
+        <div class="eight columns">
+            <input class="u-full-width" placeholder="$exampleComment" type="text" maxLength="1000" id="comment"></input>
+        </div>
+        <div class="four columns">
+            <button id="button-add-comment" class="button u-pull-right aqui-button">$addComment</button>
+        </div>
+    </div>
+</div>
+
+<input id="connection-string" style="display:none;" value="ws://$serverName:$publicWsPort/$teacherId"/>
+<input id="teacher-id" style="display:none;" value="$teacherId"/>
+
+<script src="/$teacherId/__static__/js/websocket_common.js"></script>
+<script src="/$teacherId/__static__/js/user_ticket.js"></script>
+
