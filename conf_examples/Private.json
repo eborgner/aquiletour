@@ -1,0 +1,4 @@
+{
+    "privateHttpPort" :  "$privateHttpPort",
+    "privateWsPort"   :  "$privateWsPort"
+}

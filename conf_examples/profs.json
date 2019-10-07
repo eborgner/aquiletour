@@ -1,126 +1,105 @@
 {
     "mbergeron": {
-        "authToken": "ca9a7b652f26c0ea550a67592dd092a076b4fa1b84115f58955125f1", 
         "surname": "Bergeron", 
         "name": "Mathieu", 
         "id": "mbergeron"
     }, 
     "skyprianou": {
-        "authToken": "ff917e024ca3f6d986991e69efe5c2f427999acd2b185f6b71778be4", 
         "surname": "Kyprianou", 
         "name": "Sotira", 
         "id": "skyprianou"
     }, 
     "cmongeon": {
-        "authToken": "61ac5c7f8f6f564800a90e26e3f5e9a6cc9b9c10e6cf3efbcb92a3e2", 
         "surname": "Mongeon", 
         "name": "Christian", 
         "id": "cmongeon"
     }, 
-    "kfostine": {
-        "authToken": "6d1f7594880aa8b37b4fe07037b71a1f80822ed94b74cabdc0dbd707", 
-        "surname": "Fostiné", 
-        "name": "Kerlyne", 
-        "id": "kfostine"
-    }, 
-    "fedoukou": {
-        "authToken": "92cec7d7d1f36c36e04723b211568ba69cf5915de5183e508d3e3264", 
-        "surname": "Edoukou", 
-        "name": "Frédéric", 
-        "id": "fedoukou"
-    }, 
-    "appilon": {
-        "authToken": "aff1f2ccdba87c725f7414762d300fb44ac49757eaaf5f181d948f39", 
-        "surname": "Pilon", 
-        "name": "André P.", 
-        "id": "appilon"
-    }, 
     "lbouchard": {
-        "authToken": "c3604dacb6f046fbf3e6e0e7901b7fa21252bb1e8f7a7c2c809af026", 
         "surname": "Bouchard", 
         "name": "Louis", 
         "id": "lbouchard"
     }, 
+    "fedoukou": {
+        "surname": "Edoukou", 
+        "name": "Frédéric", 
+        "id": "fedoukou"
+    }, 
+    "kfostine": {
+        "surname": "Fostiné", 
+        "name": "Kerlyne", 
+        "id": "kfostine"
+    }, 
+    "appilon": {
+        "surname": "Pilon", 
+        "name": "André P.", 
+        "id": "appilon"
+    }, 
     "kbeke": {
-        "authToken": "cd4355e5b000b8d0aa5c7f1980400ef20ce8688a21989dd1f14423d1", 
         "surname": "Béké", 
         "name": "Kwamé", 
         "id": "kbeke"
     }, 
     "slabranche": {
-        "authToken": "474b75589a2eb5affcfbf141d6ee6d8df443dffead3d1892f129a18b", 
         "surname": "Labranche", 
         "name": "Sylvain", 
         "id": "slabranche"
     }, 
     "fboughanmi": {
-        "authToken": "a9e80d61f55a2df8a549c428780c5da33517b11aa8edfea5c5825a10", 
         "surname": "Boughanmi", 
         "name": "Ferdaws", 
         "id": "fboughanmi"
     }, 
     "nleduc": {
-        "authToken": "77e36c7b9a946b7e71607ddb6466967d1f7b1911f85dbc41c29cd9dd", 
         "surname": "Leduc", 
         "name": "Nicolas", 
         "id": "nleduc"
     }, 
     "faitammar": {
-        "authToken": "6ea948c1386e5809033214eeb8e71b9ddff0e90970792da80db6f05d", 
         "surname": "Ait-Ammar", 
         "name": "Farida", 
         "id": "faitammar"
     }, 
     "aseguin": {
-        "authToken": "c06c5c9e947fed7b2a7142ae0b5dd38a1c06c9fba6afb099a8e71f8b", 
         "surname": "Seguin", 
         "name": "Axel", 
         "id": "aseguin"
     }, 
     "ayahia": {
-        "authToken": "b5fdb741ef220bc4fd95804edc20e3aa171e69bc07f20a7c29cb1fb4", 
         "surname": "Yahia", 
         "name": "Abdelhabib", 
         "id": "ayahia"
     }, 
     "mzouba": {
-        "authToken": "afb8ebd6a9887910959d05fcb4ec363893472894b775012482e1fed1", 
         "surname": "Zouba", 
         "name": "Mohammed", 
         "id": "mzouba"
     }, 
     "apilon": {
-        "authToken": "aa40f810e4b6eaaff1e05fd6cffd54ba6f933055dd1544b7786fdfad", 
         "surname": "Pilon", 
         "name": "Alain", 
         "id": "apilon"
     }, 
     "dhaouari": {
-        "authToken": "ef79cedd8153635408837a279cef853d119af21ace9aa72e9038051e", 
         "surname": "Haouari", 
         "name": "Dorsaf", 
         "id": "dhaouari"
     }, 
     "phaccoun": {
-        "authToken": "baaf0645935e652d7052ebf719be9ff07edb07987dd32ca15415c584", 
         "surname": "Haccoun", 
         "name": "Patrick", 
         "id": "phaccoun"
     }, 
     "mroussel": {
-        "authToken": "8bf87707b967c0c0bbb908104026471e3b1643976e945e6d22ac30a6", 
         "surname": "Roussel", 
         "name": "Mathieu", 
         "id": "mroussel"
     }, 
     "mmoulla": {
-        "authToken": "9e5f5937724f66edf431e9df89e0a813a7841fad54261e1e76ec35cc", 
         "surname": "Moulla", 
         "name": "Mohand", 
         "id": "mmoulla"
     }, 
     "sdeschenes": {
-        "authToken": "1ae0f65f4a1c0f2a14de7ea5bbb40ddfa21f28593d21602142a67f1f", 
         "surname": "Deschênes", 
         "name": "Simon", 
         "id": "sdeschenes"
