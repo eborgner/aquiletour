@@ -1,3 +1,2 @@
 students.json
-teachers.json
-Conf.json
+server/conf/*.json

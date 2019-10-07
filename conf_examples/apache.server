@@ -1,4 +1,4 @@
-<VirtualHost localhost:80>
+<VirtualHost *:80>
 
     ServerName $serverName
     ProxyPreserveHost On
