@@ -1,6 +1,6 @@
     RewriteCond %{HTTP:Connection} Upgrade [NC]
     RewriteCond %{HTTP:Upgrade} websocket [NC]
-    RewriteRule /$teacherId/(.*) ws://localhost:$privateWsPort/$1  [P,L]
+    RewriteRule /$teacherId.* ws://localhost:$privateWsPort  [P,L]
 
     ProxyPass /$teacherId http://localhost:$privateHttpPort/$teacherId
     ProxyPassReverse /$teacherId http://localhost:$privateHttpPort/$teacherId
