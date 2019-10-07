@@ -60,8 +60,6 @@ public class MainControler {
     public static void initialize() {
         
         readStudents();
-        readTicketsDir();
-        initializeTicketsDirWatcher();
         initializeStudentsFileWatcher();
 
     }
@@ -106,42 +104,6 @@ public class MainControler {
 
     }
     
-    private static void readTicketsDir() {
-        
-        for(File ticketFile : Constants.TICKETS_DIR.toFile().listFiles()) {
-            
-            try {
-
-                Ticket ticket = Ticket.fromFile(ticketFile);
-                addTicket(ticket);
-
-            } catch (FileNotFoundException e) {
-                
-                System.out.println("[ERROR] cannot read ticket from file: " + ticketFile.getAbsolutePath());
-
-            }
-        }
-        
-    }
-    
-    private static void initializeTicketsDirWatcher() {
-
-
-		ticketsDirWatcher = new DirectoryWatcher(Constants.TICKETS_DIR);
-				
-		ticketsDirWatcher.setOnDeleteListener(new OnDeleteListener() {
-			@Override
-			public void onDelete(String filename) {
-				
-				String ticketId = Ticket.idFromFilename(filename);
-				MainControler.deleteTicket(ticketId);
-
-			}
-		});
-
-        ticketsDirWatcher.start();
-    }
-
     private static void initializeStudentsFileWatcher() {
     	
 		studentsFileWatcher = new FileWatcher(studentsPath);
@@ -166,8 +128,6 @@ public class MainControler {
         tickets.addTicket(ticket);
 
         WebSockets.getInstance().displayNewTicket(ticket);
-        
-        ticket.writeOnDisk();
 
     }
 
@@ -217,8 +177,6 @@ public class MainControler {
             notifyToAdjustPosition();
 
             WebSockets.getInstance().removeDisplayedTicket(ticketToRemove.getId());
-            
-            ticketToRemove.deleteOnDisk();
 
         }
     }
@@ -247,8 +205,7 @@ public class MainControler {
 			ticket.setComment(comment);
 			
 			WebSockets.getInstance().updateComment(message);
-        	
-			ticket.writeOnDisk();
+
         }
     }
 

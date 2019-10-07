@@ -115,15 +115,5 @@ public class Constants {
         DEFAULT_TEMPLATE_PATH = Paths.get(HTML_DIR.toString(), DEFAULT_TEMPLATE_FILENAME);
 
     }
-    
-    public static void initializeTicketsDir() {
-
-        TICKETS_DIRNAME = Pages.getInstance().getDisplayTickets();
-        TICKETS_DIR = Paths.get(ROOT_DIR.toString(), TICKETS_DIRNAME);
-        if(!TICKETS_DIR.toFile().exists()) {
-        	TICKETS_DIR.toFile().mkdir();
-        }
-
-    }
 
 }
