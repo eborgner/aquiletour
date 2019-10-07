@@ -37,7 +37,7 @@ public class LoginRouter {
     public static Response route(Path urlPath, Cookies cookies, String ipAddress,
             String httpUserAgent) {
 
-        Response response = null;
+        Response response = redirectToRoot(cookies);
         
         if(Utils.isRoot(urlPath)){
 
@@ -46,37 +46,20 @@ public class LoginRouter {
         }else if(LoginPath.isValidLoginPath(urlPath)) {
         	
         	String loginCode = LoginPath.getLoginCode(urlPath);
-        	
-        	if(loginCode.equals(Login.getInstance().getLoginCode())) {
 
-				String teacherId = LoginControler.teacherIdFromLoginCode(loginCode);
+			String teacherId = LoginControler.teacherIdFromLoginCode(loginCode);
 				
-				if(teacherId != null) {
+			if(teacherId != null) {
 
-					String authToken = LoginControler.getToken(loginCode);
+				String authToken = LoginControler.getToken(loginCode);
 
-					cookies.setAuthToken(authToken);
+				cookies.setAuthToken(authToken);
 
-					response = new RedirectResponse(Paths.get(teacherId), cookies);
-
-				}else {
-					
-					response = redirectToRoot(cookies);
-
-				}
-        		
-        	}else{
-        		
-				response = redirectToRoot(cookies);
-        		
-        	}
-        	
-        }else {
-        	
-        	response = redirectToRoot(cookies);
-
+				response = new RedirectResponse(Paths.get(teacherId), cookies);
+			}
         }
-
+        
+        
         return response;
     }
 
