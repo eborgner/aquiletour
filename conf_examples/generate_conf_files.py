@@ -21,7 +21,7 @@ import json
 import codecs
 
 if len(sys.argv) <= 5:
-    print "usage %s users_and_port.json apache.server apache.user Conf.template conf_dir" % sys.argv[0]
+    print "usage %s users_and_port.json apache.server apache.user apache.login Conf.template conf_dir" % sys.argv[0]
     exit(0)
 
 INPUT_PATH = sys.argv[1]
@@ -41,10 +41,16 @@ def insert_values(user, template):
 
     for line in template.split('\n'):
 
-        line = line.replace("$user", user['id'])
-        line = line.replace("$authToken", user['authToken'])
-        line = line.replace("$httpPort", str(user['httpPort']))
-        line = line.replace("$webSocketPort", str(user['webSocketPort']))
+        line = line.replace("$teacherId", user['teacherId'])
+        line = line.replace("$teacherToken", user['teacherToken'])
+        line = line.replace("$teacherName", user['teacherName'])
+        line = line.replace("$teacherSurname", user['teacherSurname'])
+
+        line = line.replace("$privateHttpPort", str(user['privateHttpPort']))
+        line = line.replace("$privateWsPort", str(user['privateWsPort']))
+
+        line = line.replace("$publicHttpPort", str(user['publicHttpPort']))
+        line = line.replace("$publicWsPort", str(user['publicWsPort']))
         line = line.replace("$serverName", SERVER_NAME)
 
         result += line + '\n'
