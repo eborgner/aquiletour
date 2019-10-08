@@ -23,7 +23,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
-import ca.aquiletour.controlers.LoginControler;
+import ca.aquiletour.controlers.DispatchControler;
 import ca.aquiletour.controlers.MainControler;
 import ca.aquiletour.data.Student;
 import ca.aquiletour.data.Ticket;
@@ -65,7 +65,7 @@ public class MainRouter {
 
         }else {
         	
-        	response = LoginRouter.redirectToRoot(cookies);
+        	response = DispatchRouter.redirectToRoot(cookies);
 
         }
         
@@ -79,7 +79,7 @@ public class MainRouter {
         
         if(userWantsToDisplayAllTickets(urlPath) && userIsAllowedToDisplayAllTickets(cookies)) {
 
-        	LoginControler.openQueue();
+        	DispatchControler.openTeacher();
 
     		builder = displayAllTickets(cookies);
     		
@@ -98,7 +98,7 @@ public class MainRouter {
     }
     
     public static Response authenticateUser(Cookies cookies) {
-    	return LoginRouter.redirectToRoot(cookies);
+    	return DispatchRouter.redirectToRoot(cookies);
     }
 
     public static Response routeDisplayUserTicket(Cookies cookies, String ipAddress, String httpUserAgent) {

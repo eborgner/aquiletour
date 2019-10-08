@@ -25,16 +25,16 @@ import java.nio.file.Paths;
 import ca.aquiletour.Constants;
 import ca.aquiletour.utils.Json;
 
-public class Private extends Dictionary {
+public class Dispatch extends Dictionary {
 
-    protected int privateHttpPort;
-    protected int privateWsPort;
+    protected int dispatchHttpPort;
+    protected int dispatchWsPort;
 
-    private static Path path = Paths.get(Constants.CONF_DIR.toString(), Private.class.getSimpleName() + Constants.JSON_EXTENSION);
+    private static Path path = Paths.get(Constants.CONF_DIR.toString(), Dispatch.class.getSimpleName() + Constants.JSON_EXTENSION);
 
-    private static Private instance;
+    private static Dispatch instance;
 
-    public static Private getInstance() {
+    public static Dispatch getInstance() {
         return instance;
     }
 
@@ -42,7 +42,7 @@ public class Private extends Dictionary {
 
         try {
 
-            instance = Json.fromJson(path, Private.class);
+            instance = Json.fromJson(path, Dispatch.class);
             instance.failIfSomeFieldIsNull();
 
         } catch (FileNotFoundException e) {
@@ -51,20 +51,20 @@ public class Private extends Dictionary {
 
     }
 
-	public int getPrivateHttpPort() {
-		return privateHttpPort;
+	public int getDispatchHttpPort() {
+		return dispatchHttpPort;
 	}
 
-	public void setPrivateHttpPort(int privateHttpPort) {
-		this.privateHttpPort = privateHttpPort;
+	public void setDispatchHttpPort(int dispatchHttpPort) {
+		this.dispatchHttpPort = dispatchHttpPort;
 	}
 
-	public int getPrivateWsPort() {
-		return privateWsPort;
+	public int getDispatchWsPort() {
+		return dispatchWsPort;
 	}
 
-	public void setPrivateWsPort(int privateWsPort) {
-		this.privateWsPort = privateWsPort;
+	public void setDispatchWsPort(int dispatchWsPort) {
+		this.dispatchWsPort = dispatchWsPort;
 	}
     
 }

@@ -2,5 +2,7 @@
     "teacherId"       :  "mbergeron",
     "teacherName"     :  "Mathieu",
     "teacherSurname"  :  "Bergeron",
-    "teacherToken"    :  "asdf1234"
+    "teacherToken"    :  "asdf1234",
+    "teacherHttpPort" :  "3001",
+    "teacherWsPort"   :  "3002"
 }

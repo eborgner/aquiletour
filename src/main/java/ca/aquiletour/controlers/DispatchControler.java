@@ -28,14 +28,15 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 
 import ca.aquiletour.http.HttpOut;
-import ca.aquiletour.http.path.PrivatePath;
+import ca.aquiletour.http.path.PrivateDispatchPath;
 import ca.aquiletour.http.path.RoutePath;
+import ca.aquiletour.settings.Dispatch;
 import ca.aquiletour.settings.Login;
 import ca.aquiletour.settings.Public;
 import ca.aquiletour.settings.Teacher;
 import ca.aquiletour.utils.Digest;
 
-public class LoginControler {
+public class DispatchControler {
 	
 	private static BiMap<String, String> loginCodeByTeacherId = HashBiMap.create();
 	private static Map<String, String> tokenByLoginCode = new HashMap<>();
@@ -67,7 +68,7 @@ public class LoginControler {
 		// TODO?: generate a new token each time?
 		//        more secure, but student
 		//        will input loginCode each time
-		String nextToken = LoginControler.token;
+		String nextToken = DispatchControler.token;
 		//String nextToken = Digest.digest(Conf.getInstance().getTeacherId() + String.format("%.10f", seededRandom.nextDouble()));
 		
 		tokenByLoginCode.put(loginCode, nextToken);
@@ -93,12 +94,22 @@ public class LoginControler {
 	}
 
 
-    public static void openQueue() {
+    public static void openTeacher() {
 		String connectionString = String.format("http://localhost:%s/%s/%s/%s", 
-													Public.getInstance().getPublicHttpPort(),
-													RoutePath.PRIVATE_PREFIX,
+													Dispatch.getInstance().getDispatchHttpPort(),
+													RoutePath.DISPATCH_PREFIX,
 													Teacher.getInstance().getTeacherId(),
-													PrivatePath.ACTION_OPEN);
+													PrivateDispatchPath.ACTION_OPEN);
+
+		HttpOut.send(connectionString);
+    }
+
+    public static void closeTeacher() {
+		String connectionString = String.format("http://localhost:%s/%s/%s/%s", 
+													Dispatch.getInstance().getDispatchHttpPort(),
+													RoutePath.DISPATCH_PREFIX,
+													Teacher.getInstance().getTeacherId(),
+													PrivateDispatchPath.ACTION_CLOSE);
 
 		HttpOut.send(connectionString);
     }

@@ -16,49 +16,33 @@
 // along with aquiletour.  If not, see <https://www.gnu.org/licenses/>
 
 
-package ca.aquiletour.http.path;
+package ca.aquiletour.http.connectors;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
+import java.util.concurrent.BrokenBarrierException;
 
+import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpHandler;
 
-public class LoginPath {
-	
-	private static final int CODE_INDEX = 0;
+import ca.aquiletour.http.path.MainPath;
+import ca.aquiletour.http.path.RoutePath;
+import ca.aquiletour.http.responses.JsonResponse;
+import ca.aquiletour.http.responses.Response;
+import ca.aquiletour.http.routers.Cookies;
+import ca.aquiletour.http.routers.DispatchRouter;
+import ca.aquiletour.http.routers.MainRouter;
+import ca.aquiletour.http.routers.PrivateDispatchRouter;
+import ca.aquiletour.http.routers.StaticRouter;
+import ca.aquiletour.settings.Login;
 
+public class DispatchOnly implements HttpHandler {
 
-	public static boolean isValidLoginPath(Path urlPath){
-		
-		boolean isValidLoginPath = false;
-
-		String loginCode = getLoginCode(urlPath);
-		
-		if(loginCode != null) {
-			
-			isValidLoginPath = isLoginCode(loginCode);
-
-		}
-		
-		return isValidLoginPath;
-	}
-
-	public static String getLoginCode(Path urlPath){
-		String loginCode = Utils.getName(urlPath, CODE_INDEX);
-		return loginCode;
+	@Override
+	public void handle(HttpExchange arg0) throws IOException {
+		// TODO
 	}
 	
-	private static boolean isLoginCode(String loginCode) {
-		
-		boolean isLoginCode = false;
-		
-		try {
-			
-			Integer.valueOf(loginCode);
-			isLoginCode = true;
-			
-			
-		}catch(Exception e) {}
-		
-		return isLoginCode;
-	}
 }

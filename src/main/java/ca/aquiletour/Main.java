@@ -30,13 +30,14 @@ import com.sun.net.httpserver.*;
 
 import ca.aquiletour.controlers.MainControler;
 import ca.aquiletour.controlers.WebSockets;
-import ca.aquiletour.http.connectors.LoginAndTeacher;
+import ca.aquiletour.http.connectors.DispatchAndTeacher;
 import ca.aquiletour.settings.Login;
-import ca.aquiletour.settings.Private;
+import ca.aquiletour.settings.Teacher;
+import ca.aquiletour.settings.Dispatch;
 
 public class Main{
     
-    private static int httpPort = Private.getInstance().getPrivateHttpPort();
+    private static int httpPort = Teacher.getInstance().getTeacherHttpPort();
     
     private static HttpServer httpServer;
     private static WebSockets webSocketServer;
@@ -94,7 +95,7 @@ public class Main{
     	
     	try {
 
-			HttpHandler mainHttpHandler = new LoginAndTeacher();
+			HttpHandler mainHttpHandler = new DispatchAndTeacher();
 
 			httpServer = HttpServer.create(new InetSocketAddress(httpPort),0);
 
@@ -116,7 +117,7 @@ public class Main{
 
 			webSocketServer = WebSockets.getInstance();
 
-			int webSocketPort = Private.getInstance().getPrivateWsPort();
+			int webSocketPort = Teacher.getInstance().getTeacherWsPort();
 			
 			if(isPortUsed(webSocketPort)) {
 				

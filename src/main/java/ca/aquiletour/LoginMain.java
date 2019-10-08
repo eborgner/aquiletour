@@ -28,7 +28,7 @@ import com.sun.net.httpserver.*;
 
 import ca.aquiletour.controlers.MainControler;
 import ca.aquiletour.controlers.WebSockets;
-import ca.aquiletour.http.connectors.LoginAndTeacher;
+import ca.aquiletour.http.connectors.DispatchAndTeacher;
 
 public class LoginMain{ }
 

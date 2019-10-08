@@ -22,8 +22,9 @@ scripts_dir=$(dirname $(readlink -f $0))
 ###################
 
 cp -v $examples_dir/students.json $webapp_dir/
-cp -v $examples_dir/teachers.json $server_conf_dir/
-cp -v $examples_dir/Conf.json $server_conf_dir/
+cp -v $examples_dir/Dispatch.json $server_conf_dir/
+cp -v $examples_dir/Public.json $server_conf_dir/
+cp -v $examples_dir/Teacher.json $server_conf_dir/
 
 
 

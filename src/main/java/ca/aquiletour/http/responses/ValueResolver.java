@@ -24,7 +24,7 @@ import java.util.Map;
 import ca.aquiletour.settings.Lang;
 import ca.aquiletour.settings.Login;
 import ca.aquiletour.settings.Pages;
-import ca.aquiletour.settings.Private;
+import ca.aquiletour.settings.Dispatch;
 import ca.aquiletour.settings.Public;
 import ca.aquiletour.settings.Strings;
 import ca.aquiletour.settings.Teacher;
@@ -62,9 +62,9 @@ public class ValueResolver {
 
             value = Teacher.getInstance().getString(key);
 
-        } else if (Private.getInstance().hasString(key)) {
+        } else if (Dispatch.getInstance().hasString(key)) {
 
-            value = Private.getInstance().getString(key);
+            value = Dispatch.getInstance().getString(key);
 
         } else if (Public.getInstance().hasString(key)) {
 
