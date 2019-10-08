@@ -26,7 +26,7 @@ public class RoutePath {
 
 	private static final String USER_PREFIX = Teacher.getInstance().getTeacherId();
 	public static final String STATIC_PREFIX = "__static__";
-    public static final String PRIVATE_PREFIX = "__private__";
+    public static final String DISPATCH_PREFIX = "__dispatch__";
 
 	public static boolean isStatic(Path urlPath) {
 		return isStatic(urlPath, 0) || isStatic(urlPath, 1);
@@ -41,12 +41,13 @@ public class RoutePath {
 	}
 
 	private static boolean isPrivate(Path urlPath, int index) {
-		return Utils.isNameEqual(urlPath, index, PRIVATE_PREFIX);
+		return Utils.isNameEqual(urlPath, index, DISPATCH_PREFIX);
 	}
 
 	private static boolean isPrivate(String ipAddress) {
-		// FIXME: is that always IPv4???
-		return ipAddress.equals("127.0.0.1");
+		return ipAddress.equals("127.0.0.1") 
+				|| ipAddress.equals("localhost") 
+				|| ipAddress.endsWith("::1");
 	}
 
 	public static Path removeTeacherPrefix(Path urlPath) {
@@ -58,7 +59,7 @@ public class RoutePath {
 	}
 
 	public static Path removePrivatePrefix(Path urlPath) {
-		return removePrefix(urlPath, PRIVATE_PREFIX);
+		return removePrefix(urlPath, DISPATCH_PREFIX);
 	}
 
 	private static Path removePrefix(Path urlPath, String prefix) {

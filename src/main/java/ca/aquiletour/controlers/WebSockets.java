@@ -45,12 +45,12 @@ import ca.aquiletour.messages.outgoing.MsgRemoveDisplayedTicket;
 import ca.aquiletour.Constants;
 import ca.aquiletour.data.Ticket;
 import ca.aquiletour.settings.Login;
-import ca.aquiletour.settings.Private;
+import ca.aquiletour.settings.Dispatch;
 import ca.aquiletour.settings.Teacher;
 
 public class WebSockets extends WebSocketServer {
 	
-	private static WebSockets instance = new WebSockets(Private.getInstance().getPrivateWsPort());
+	private static WebSockets instance = new WebSockets(Teacher.getInstance().getTeacherWsPort());
 
 	public static WebSockets getInstance() {return instance;}
 	
@@ -84,6 +84,7 @@ public class WebSockets extends WebSocketServer {
 					public void run() {
 						if(teacherSockets.isEmpty()) {
 							Login.requestNewLoginInfo();
+							DispatchControler.closeTeacher();
 						}
 					}
 				}, Constants.TEACHER_DECONNECTION_DELAY);

@@ -1,0 +1,10 @@
+    # XXX: dispatch MUST be launched first
+
+    # public requests 
+    ProxyPass /  http://localhost:$dispatchHttpPort/
+    ProxyPassReverse / http://localhost:$dispatchHttpPort/
+
+    # local requests are ignored
+    # TODO: how to do this cleanly?
+    ProxyPass /__dispatch__         http://localhost:0/
+    ProxyPassReverse /__dispatch__  http://localhost:0/

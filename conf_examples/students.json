@@ -1,0 +1,16 @@
+{
+    "rolet": {
+        "registrationId": "123456", 
+        "surname": "Letendre", 
+        "name": "Robert", 
+        "id": "rolet",
+        "authToken": "bbbbbbbbbbbbbbb"
+    }, 
+    "allam": {
+        "registrationId": "654321", 
+        "surname": "Lamoue", 
+        "name": "Alice", 
+        "id": "allam",
+        "authToken": "cccccccccccccc"
+    }
+}

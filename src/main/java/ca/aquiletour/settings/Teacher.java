@@ -31,6 +31,8 @@ public class Teacher extends Dictionary {
     protected String teacherName;
     protected String teacherSurname;
     protected String teacherToken;
+    protected int teacherHttpPort;
+    protected int teacherWsPort;
 
     private static Path path = Paths.get(Constants.CONF_DIR.toString(), Teacher.class.getSimpleName() + Constants.JSON_EXTENSION);
 
@@ -84,7 +86,21 @@ public class Teacher extends Dictionary {
 	public void setTeacherToken(String teacherToken) {
 		this.teacherToken = teacherToken;
 	}
-    
-    
+
+	public int getTeacherHttpPort() {
+		return teacherHttpPort;
+	}
+
+	public void setTeacherHttpPort(int teacherHttpPort) {
+		this.teacherHttpPort = teacherHttpPort;
+	}
+
+	public int getTeacherWsPort() {
+		return teacherWsPort;
+	}
+
+	public void setTeacherWsPort(int teacherWsPort) {
+		this.teacherWsPort = teacherWsPort;
+	}
 
 }
