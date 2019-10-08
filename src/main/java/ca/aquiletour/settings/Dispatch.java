@@ -28,7 +28,6 @@ import ca.aquiletour.utils.Json;
 public class Dispatch extends Dictionary {
 
     protected int dispatchHttpPort;
-    protected int dispatchWsPort;
 
     private static Path path = Paths.get(Constants.CONF_DIR.toString(), Dispatch.class.getSimpleName() + Constants.JSON_EXTENSION);
 
@@ -57,14 +56,6 @@ public class Dispatch extends Dictionary {
 
 	public void setDispatchHttpPort(int dispatchHttpPort) {
 		this.dispatchHttpPort = dispatchHttpPort;
-	}
-
-	public int getDispatchWsPort() {
-		return dispatchWsPort;
-	}
-
-	public void setDispatchWsPort(int dispatchWsPort) {
-		this.dispatchWsPort = dispatchWsPort;
 	}
     
 }

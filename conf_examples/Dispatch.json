@@ -1,4 +1,3 @@
 {
-    "dispatchHttpPort" :  3001,
-    "dispatchWsPort"   :  3002
+    "dispatchHttpPort" :  3001
 }
