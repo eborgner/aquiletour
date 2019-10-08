@@ -21,10 +21,11 @@ scripts_dir=$(dirname $(readlink -f $0))
 . $scripts_dir/include.sh
 ###################
 
-cp -v $examples_dir/students.json $webapp_dir/
+cp -v $examples_dir/etudiants.json $webapp_dir/
 cp -v $examples_dir/Dispatch.json $server_conf_dir/
 cp -v $examples_dir/Public.json $server_conf_dir/
 cp -v $examples_dir/Teacher.json $server_conf_dir/
+cp -v $examples_dir/Lang.json $server_conf_dir/
 
 
 
