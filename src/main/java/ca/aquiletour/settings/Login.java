@@ -20,7 +20,7 @@ package ca.aquiletour.settings;
 
 import ca.aquiletour.http.HttpFetchListener;
 import ca.aquiletour.http.HttpOut;
-import ca.aquiletour.http.path.PrivatePath;
+import ca.aquiletour.http.path.PrivateDispatchPath;
 import ca.aquiletour.http.path.RoutePath;
 import ca.aquiletour.utils.Json;
 
@@ -46,10 +46,10 @@ public class Login extends Dictionary {
     public static void requestNewLoginInfo() {
 
 		String connectionString = String.format("http://localhost:%s/%s/%s/%s", 
-													Public.getInstance().getPublicHttpPort(),
-													RoutePath.PRIVATE_PREFIX,
+													Dispatch.getInstance().getDispatchHttpPort(),
+													RoutePath.DISPATCH_PREFIX,
 													Teacher.getInstance().getTeacherId(),
-													PrivatePath.ACTION_NEXT_CODE);
+													PrivateDispatchPath.ACTION_NEXT_CODE);
 		
 		HttpOut.fetch(connectionString, new HttpFetchListener() {
 			@Override

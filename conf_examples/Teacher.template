@@ -1,6 +1,0 @@
-{
-    "teacherId"       :  "$teacherId",
-    "teacherName"     :  "$teacherName",
-    "teacherSurname"  :  "$teacherSurname",
-    "teacherToken"    :  "$teacherToken"
-}

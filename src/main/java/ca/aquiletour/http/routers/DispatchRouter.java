@@ -21,8 +21,8 @@ package ca.aquiletour.http.routers;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import ca.aquiletour.controlers.LoginControler;
-import ca.aquiletour.http.path.LoginPath;
+import ca.aquiletour.controlers.DispatchControler;
+import ca.aquiletour.http.path.DispatchPath;
 import ca.aquiletour.http.path.Utils;
 import ca.aquiletour.http.responses.RedirectResponse;
 import ca.aquiletour.http.responses.Response;
@@ -30,7 +30,7 @@ import ca.aquiletour.http.responses.TemplateResponse;
 import ca.aquiletour.http.responses.ValueResolver;
 import ca.aquiletour.settings.Login;
 
-public class LoginRouter {
+public class DispatchRouter {
 	
 	private static final String ENTER_CODE = "enter_code";
     
@@ -43,15 +43,15 @@ public class LoginRouter {
 
 			response = new TemplateResponse(cookies, ENTER_CODE, new ValueResolver(null));
 
-        }else if(LoginPath.isValidLoginPath(urlPath)) {
+        }else if(DispatchPath.isValidLoginPath(urlPath)) {
         	
-        	String loginCode = LoginPath.getLoginCode(urlPath);
+        	String loginCode = DispatchPath.getLoginCode(urlPath);
 
-			String teacherId = LoginControler.teacherIdFromLoginCode(loginCode);
+			String teacherId = DispatchControler.teacherIdFromLoginCode(loginCode);
 				
 			if(teacherId != null) {
 
-				String authToken = LoginControler.getToken(loginCode);
+				String authToken = DispatchControler.getToken(loginCode);
 
 				cookies.setAuthToken(authToken);
 

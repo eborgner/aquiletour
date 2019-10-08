@@ -1,5 +1,5 @@
 {
     "serverName"      :  "localhost",
-    "publicHttpPort"  :  "3000",
-    "publicWsPort"    :  "3001"
+    "publicHttpPort"  :  3001,
+    "publicWsPort"    :  3002
 }

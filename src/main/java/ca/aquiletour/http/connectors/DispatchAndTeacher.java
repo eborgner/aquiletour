@@ -30,13 +30,13 @@ import ca.aquiletour.http.path.MainPath;
 import ca.aquiletour.http.path.RoutePath;
 import ca.aquiletour.http.responses.Response;
 import ca.aquiletour.http.routers.Cookies;
-import ca.aquiletour.http.routers.LoginRouter;
+import ca.aquiletour.http.routers.DispatchRouter;
 import ca.aquiletour.http.routers.MainRouter;
-import ca.aquiletour.http.routers.PrivateRouter;
+import ca.aquiletour.http.routers.PrivateDispatchRouter;
 import ca.aquiletour.http.routers.StaticRouter;
 import ca.aquiletour.settings.Teacher;
 
-public class LoginAndTeacher implements HttpHandler {
+public class DispatchAndTeacher implements HttpHandler {
 
 
 
@@ -108,7 +108,7 @@ public class LoginAndTeacher implements HttpHandler {
 		
 		urlPath = RoutePath.removePrivatePrefix(urlPath);
 		
-		return PrivateRouter.route(urlPath);
+		return PrivateDispatchRouter.route(urlPath);
 
 	}
 
@@ -124,7 +124,7 @@ public class LoginAndTeacher implements HttpHandler {
 		
 		}else {
 
-			return LoginRouter.route(urlPath, requestCookies, ipAddress, httpUserAgent);
+			return DispatchRouter.route(urlPath, requestCookies, ipAddress, httpUserAgent);
 
 		}
 	}

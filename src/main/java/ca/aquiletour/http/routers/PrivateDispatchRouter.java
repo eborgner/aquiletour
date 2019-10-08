@@ -20,39 +20,39 @@ package ca.aquiletour.http.routers;
 
 import java.nio.file.Path;
 
-import ca.aquiletour.controlers.LoginControler;
-import ca.aquiletour.http.path.PrivatePath;
+import ca.aquiletour.controlers.DispatchControler;
+import ca.aquiletour.http.path.PrivateDispatchPath;
 import ca.aquiletour.http.responses.JsonResponse;
 import ca.aquiletour.http.responses.Response;
 import ca.aquiletour.settings.Login;
 
-public class PrivateRouter {
+public class PrivateDispatchRouter {
 
 	
     public static Response route(Path urlPath) {
 
         Response response;
         
-        String teacherId = PrivatePath.getTeacherId(urlPath);
+        String teacherId = PrivateDispatchPath.getTeacherId(urlPath);
 
-        if(PrivatePath.isActionOpen(urlPath)) {
+        if(PrivateDispatchPath.isActionOpen(urlPath)) {
         	
-        	LoginControler.open(teacherId);
+        	DispatchControler.open(teacherId);
         	
         	response = JsonResponse.emptyResponse();
 
-        }else if(PrivatePath.isActionNextCode(urlPath)) {
+        }else if(PrivateDispatchPath.isActionNextCode(urlPath)) {
 
-        	String nextCode = LoginControler.nextCode(teacherId);
+        	String nextCode = DispatchControler.nextCode(teacherId);
         	
-        	Login login = new Login(nextCode, LoginControler.nextToken(nextCode));
+        	Login login = new Login(nextCode, DispatchControler.nextToken(nextCode));
         	
         	response = new JsonResponse(login);
 
         	
-        }else if(PrivatePath.isActionClose(urlPath)) {
+        }else if(PrivateDispatchPath.isActionClose(urlPath)) {
 
-        	LoginControler.close(teacherId);
+        	DispatchControler.close(teacherId);
 
         	response = JsonResponse.emptyResponse();
 

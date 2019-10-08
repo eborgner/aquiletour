@@ -19,33 +19,46 @@
 package ca.aquiletour.http.path;
 
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
-public class PrivatePath {
 
-	private static final int TEACHER_ID_INDEX = 0;
-	private static final int ACTION_INDEX = 1;
+public class DispatchPath {
 	
-	public static final String ACTION_OPEN = "open";
-	public static final String ACTION_NEXT_CODE = "next";
-	public static final String ACTION_CLOSE = "close";
+	private static final int CODE_INDEX = 0;
+
+
+	public static boolean isValidLoginPath(Path urlPath){
+		
+		boolean isValidLoginPath = false;
+
+		String loginCode = getLoginCode(urlPath);
+		
+		if(loginCode != null) {
+			
+			isValidLoginPath = isLoginCode(loginCode);
+
+		}
+		
+		return isValidLoginPath;
+	}
+
+	public static String getLoginCode(Path urlPath){
+		String loginCode = Utils.getName(urlPath, CODE_INDEX);
+		return loginCode;
+	}
 	
-	public static String getTeacherId(Path urlPath) {
-		return Utils.getName(urlPath, TEACHER_ID_INDEX);
-	}
-
-	public static String getAction(Path urlPath) {
-		return Utils.getName(urlPath, ACTION_INDEX);
-	}
-
-	public static boolean isActionOpen(Path urlPath) {
-		return Utils.isNameEqual(urlPath, ACTION_INDEX, ACTION_OPEN);
-	}
-
-	public static boolean isActionClose(Path urlPath) {
-		return Utils.isNameEqual(urlPath, ACTION_INDEX, ACTION_CLOSE);
-	}
-
-	public static boolean isActionNextCode(Path urlPath) {
-		return Utils.isNameEqual(urlPath, ACTION_INDEX, ACTION_NEXT_CODE);
+	private static boolean isLoginCode(String loginCode) {
+		
+		boolean isLoginCode = false;
+		
+		try {
+			
+			Integer.valueOf(loginCode);
+			isLoginCode = true;
+			
+			
+		}catch(Exception e) {}
+		
+		return isLoginCode;
 	}
 }
