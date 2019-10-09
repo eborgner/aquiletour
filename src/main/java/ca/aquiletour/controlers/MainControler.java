@@ -18,7 +18,6 @@
 
 package ca.aquiletour.controlers;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -30,21 +29,17 @@ import java.util.Map;
 
 import com.google.gson.reflect.TypeToken;
 
-import ca.aquiletour.Constants;
 import ca.aquiletour.data.Student;
 import ca.aquiletour.data.Ticket;
 import ca.aquiletour.data.TicketsList;
 import ca.aquiletour.data.User;
-import ca.aquiletour.filewatcher.DirectoryWatcher;
 import ca.aquiletour.filewatcher.FileWatcher;
-import ca.aquiletour.filewatcher.OnDeleteListener;
 import ca.aquiletour.filewatcher.OnModifyListener;
 import ca.aquiletour.messages.incoming.MsgAddComment;
 import ca.aquiletour.settings.Lang;
 import ca.aquiletour.utils.Json;
 
 public class MainControler {
-	
 	
     private static final Path studentsPath = Paths.get(Lang.getInstance().getStudentsFile());
 
@@ -54,7 +49,6 @@ public class MainControler {
     
     private static TicketsList tickets = new TicketsList();
 
-    private static DirectoryWatcher ticketsDirWatcher;
     private static FileWatcher studentsFileWatcher;
 
     public static void initialize() {
@@ -65,10 +59,6 @@ public class MainControler {
     }
     
     public static void shutdown() {
-    	if(ticketsDirWatcher != null) {
-			ticketsDirWatcher.interrupt();
-    	}
-
     	if(studentsFileWatcher != null) {
 			studentsFileWatcher.interrupt();
     	}
@@ -112,11 +102,7 @@ public class MainControler {
 			
 			@Override
 			public void onModify(String filename) {
-				System.out.println("On modify: " + filename);
-
-				studentById = readUsers(studentsPath, new TypeToken<Map<String, Student>>(){});
-				studentAsUserById = readUsers(studentsPath, new TypeToken<Map<String, User>>(){});
-
+				readStudents();
 			}
 
 		});
