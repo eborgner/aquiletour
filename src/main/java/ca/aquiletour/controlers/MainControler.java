@@ -92,7 +92,7 @@ public class MainControler {
         try {
             
             value = Json.fromJson(usersPath, typeToken);
-
+            
         } catch (FileNotFoundException e) {
 
             System.out.println("[FATAL] cannot read users list: " + usersPath.toString());
@@ -112,8 +112,10 @@ public class MainControler {
 			
 			@Override
 			public void onModify(String filename) {
+				System.out.println("On modify: " + filename);
 
 				studentById = readUsers(studentsPath, new TypeToken<Map<String, Student>>(){});
+				studentAsUserById = readUsers(studentsPath, new TypeToken<Map<String, User>>(){});
 
 			}
 
