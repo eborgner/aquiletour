@@ -202,10 +202,25 @@ function appendTicket(ticket, socket) {
     newItem.css('opacity', '0');
     newItem.animate({ opacity: 1 }, "slow");
 }
+var currentFontSizePercent = 100;
+var fontSizeIncrement = 30;
+function decreaseFontSize() {
+    if (currentFontSizePercent > fontSizeIncrement) {
+        currentFontSizePercent -= fontSizeIncrement;
+        adjustNameFontSize();
+    }
+}
+function increaseFontSize() {
+    currentFontSizePercent += fontSizeIncrement;
+    adjustNameFontSize();
+}
+function adjustNameFontSize() {
+    $('.name').css('font-size', currentFontSizePercent + '%');
+}
 function buildTicketHtml(position, ticket) {
     var student = ticket.studentAsUser;
     var positionHtml = '<td class="position">' + position + '</td>';
-    var studentHtml = '<td class="name">' + student.name + ' ' + student.surname + '</td>';
+    var studentHtml = '<td class="name" style="font-size:' + currentFontSizePercent + '%">' + student.name + ' ' + student.surname + '</td>';
     var commentHtml;
     if (ticket.comment) {
         commentHtml = '<td class="comment">' + ticket.comment + '</td>';
@@ -245,21 +260,6 @@ function removeTicket(studentId) {
         $(trToRemove).remove();
         recomputePositions();
     });
-}
-var currentFontSizePercent = 100;
-var fontSizeIncrement = 30;
-function decreaseFontSize() {
-    if (currentFontSizePercent > fontSizeIncrement) {
-        currentFontSizePercent -= fontSizeIncrement;
-        adjustNameFontSize();
-    }
-}
-function increaseFontSize() {
-    currentFontSizePercent += fontSizeIncrement;
-    adjustNameFontSize();
-}
-function adjustNameFontSize() {
-    $('.name').css('font-size', currentFontSizePercent + '%');
 }
 function onKeyPress(e) {
     var keyPressed = e.which;

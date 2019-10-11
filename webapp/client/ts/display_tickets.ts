@@ -90,12 +90,31 @@ function appendTicket(ticket, socket){
 
 }
 
+let currentFontSizePercent = 100;
+const fontSizeIncrement = 30;
+
+function decreaseFontSize(){
+    if(currentFontSizePercent > fontSizeIncrement){
+        currentFontSizePercent -= fontSizeIncrement;
+        adjustNameFontSize();
+    }
+}
+
+function increaseFontSize(){
+    currentFontSizePercent += fontSizeIncrement;
+    adjustNameFontSize();
+}
+
+function adjustNameFontSize(){
+    $('.name').css('font-size', currentFontSizePercent + '%');
+}
+
 function buildTicketHtml(position, ticket){
 
     let student = ticket.studentAsUser;
 
     let positionHtml='<td class="position">' + position + '</td>';
-    let studentHtml='<td class="name">'  + student.name + ' ' + student.surname + '</td>';
+    let studentHtml='<td class="name" style="font-size:' + currentFontSizePercent + '%">'  + student.name + ' ' + student.surname + '</td>';
     let commentHtml;
     if(ticket.comment){
         commentHtml='<td class="comment">' + ticket.comment + '</td>';
@@ -150,24 +169,6 @@ function removeTicket(studentId){
     });
 }
 
-let currentFontSizePercent = 100;
-const fontSizeIncrement = 30;
-
-function decreaseFontSize(){
-    if(currentFontSizePercent > fontSizeIncrement){
-        currentFontSizePercent -= fontSizeIncrement;
-        adjustNameFontSize();
-    }
-}
-
-function increaseFontSize(){
-    currentFontSizePercent += fontSizeIncrement;
-    adjustNameFontSize();
-}
-
-function adjustNameFontSize(){
-    $('.name').css('font-size', currentFontSizePercent + '%');
-}
 
 function onKeyPress(e){
     let keyPressed = e.which;
