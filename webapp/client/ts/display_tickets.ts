@@ -95,7 +95,7 @@ function buildTicketHtml(position, ticket){
     let student = ticket.studentAsUser;
 
     let positionHtml='<td class="position">' + position + '</td>';
-    let studentHtml='<td>'  + student.name + ' ' + student.surname + '</td>';
+    let studentHtml='<td class="name">'  + student.name + ' ' + student.surname + '</td>';
     let commentHtml;
     if(ticket.comment){
         commentHtml='<td class="comment">' + ticket.comment + '</td>';
@@ -150,8 +150,49 @@ function removeTicket(studentId){
     });
 }
 
+let currentFontSizePercent = 100;
+const fontSizeIncrement = 30;
+
+function decreaseFontSize(){
+    if(currentFontSizePercent > fontSizeIncrement){
+        currentFontSizePercent -= fontSizeIncrement;
+        adjustNameFontSize();
+    }
+}
+
+function increaseFontSize(){
+    currentFontSizePercent += fontSizeIncrement;
+    adjustNameFontSize();
+}
+
+function adjustNameFontSize(){
+    $('.name').css('font-size', currentFontSizePercent + '%');
+}
+
+function onKeyPress(e){
+    let keyPressed = e.which;
+
+    let minus = 45;
+    let equal = 61;
+    let plus = 43;
+
+    if(keyPressed == minus){
+
+        decreaseFontSize();
+
+    }else if(keyPressed == equal || keyPressed == plus){
+
+        increaseFontSize();
+
+    }
+}
+
 
 $(document).ready(function(){
+
+    $(document).keypress(function(e){
+            onKeyPress(e);
+    });
 
     const connectionString = $('#connection-string').val().toString();
 
@@ -183,4 +224,6 @@ $(document).ready(function(){
     }
 
     openSocket(connectionString, onOpen, onMessage);
+
+
 });
