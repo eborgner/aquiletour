@@ -3,14 +3,18 @@
         "registrationId": "123456", 
         "surname": "Letendre", 
         "name": "Robert", 
-        "id": "rolet",
-        "authToken": "bbbbbbbbbbbbbbb"
+        "id": "rolet"
     }, 
     "allam": {
         "registrationId": "654321", 
         "surname": "Lamoue", 
         "name": "Alice", 
-        "id": "allam",
-        "authToken": "cccccccccccccc"
+        "id": "allam"
+    },
+    "geall": {
+        "registrationId": "654321", 
+        "surname": "Allair", 
+        "name": "Gérome", 
+        "id": "geall"
     }
 }
