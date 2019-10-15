@@ -4,17 +4,11 @@
         "surname": "Letendre", 
         "name": "Robert", 
         "id": "rolet"
-    }, 
+    },
     "allam": {
         "registrationId": "654321", 
         "surname": "Lamoue", 
         "name": "Alice", 
         "id": "allam"
-    },
-    "geall": {
-        "registrationId": "654321", 
-        "surname": "Allair", 
-        "name": "Gérome", 
-        "id": "geall"
     }
 }

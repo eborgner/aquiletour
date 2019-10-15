@@ -1,16 +1,3 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 // Copyright (C) (2019) (Mathieu Bergeron) (mathieu.bergeron@cmontmorency.qc.ca)
 //
 // This file is part of aquiletour
@@ -74,7 +61,12 @@ var deleteCookie = function (cookieId) {
 //
 // You should have received a copy of the GNU Affero General Public License
 // along with aquiletour.  If not, see <https://www.gnu.org/licenses/>
-var OutgoingMessage = /** @class */ (function () {
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var OutgoingMessage = (function () {
     function OutgoingMessage() {
         // @ts-ignore Seems to work fine on recent browsers
         this._type = this.constructor.name;
@@ -83,16 +75,15 @@ var OutgoingMessage = /** @class */ (function () {
         socket.send(JSON.stringify(this));
     };
     return OutgoingMessage;
-}());
-var TicketMessage = /** @class */ (function (_super) {
+})();
+var TicketMessage = (function (_super) {
     __extends(TicketMessage, _super);
     function TicketMessage(ticketId) {
-        var _this = _super.call(this) || this;
-        _this.ticketId = ticketId;
-        return _this;
+        _super.call(this);
+        this.ticketId = ticketId;
     }
     return TicketMessage;
-}(OutgoingMessage));
+})(OutgoingMessage);
 var reconnectDelayInSeconds = 5;
 var stepDelayInSeconds = 1;
 var initialDelayInSeconds = 1;
@@ -162,24 +153,22 @@ function openSocket(connectionString, onOpen, onMessage) {
 // along with aquiletour.  If not, see <https://www.gnu.org/licenses/>
 /// <reference path="main.ts"/>
 /// <reference path="websocket_common.ts"/>
-var MsgRegisterTeacherSocket = /** @class */ (function (_super) {
+var MsgRegisterTeacherSocket = (function (_super) {
     __extends(MsgRegisterTeacherSocket, _super);
     function MsgRegisterTeacherSocket(authToken) {
-        var _this = _super.call(this) || this;
-        _this.authToken = authToken;
-        return _this;
+        _super.call(this);
+        this.authToken = authToken;
     }
     return MsgRegisterTeacherSocket;
-}(OutgoingMessage));
-var MsgCloseTicket = /** @class */ (function (_super) {
+})(OutgoingMessage);
+var MsgCloseTicket = (function (_super) {
     __extends(MsgCloseTicket, _super);
     function MsgCloseTicket(authToken, ticketId) {
-        var _this = _super.call(this, ticketId) || this;
-        _this.authToken = authToken;
-        return _this;
+        _super.call(this, ticketId);
+        this.authToken = authToken;
     }
     return MsgCloseTicket;
-}(TicketMessage));
+})(TicketMessage);
 function displayTicketList(ticketsList, socket) {
     clearTickets();
     for (var i = 0; i < ticketsList.length; i++) {
@@ -213,10 +202,25 @@ function appendTicket(ticket, socket) {
     newItem.css('opacity', '0');
     newItem.animate({ opacity: 1 }, "slow");
 }
+var currentFontSizePercent = 100;
+var fontSizeIncrement = 30;
+function decreaseFontSize() {
+    if (currentFontSizePercent > fontSizeIncrement) {
+        currentFontSizePercent -= fontSizeIncrement;
+        adjustNameFontSize();
+    }
+}
+function increaseFontSize() {
+    currentFontSizePercent += fontSizeIncrement;
+    adjustNameFontSize();
+}
+function adjustNameFontSize() {
+    $('.name').css('font-size', currentFontSizePercent + '%');
+}
 function buildTicketHtml(position, ticket) {
     var student = ticket.studentAsUser;
     var positionHtml = '<td class="position">' + position + '</td>';
-    var studentHtml = '<td>' + student.name + ' ' + student.surname + '</td>';
+    var studentHtml = '<td class="name" style="font-size:' + currentFontSizePercent + '%">' + student.name + ' ' + student.surname + '</td>';
     var commentHtml;
     if (ticket.comment) {
         commentHtml = '<td class="comment">' + ticket.comment + '</td>';
@@ -257,7 +261,22 @@ function removeTicket(studentId) {
         recomputePositions();
     });
 }
+function onKeyPress(e) {
+    var keyPressed = e.which;
+    var minus = 45;
+    var equal = 61;
+    var plus = 43;
+    if (keyPressed == minus) {
+        decreaseFontSize();
+    }
+    else if (keyPressed == equal || keyPressed == plus) {
+        increaseFontSize();
+    }
+}
 $(document).ready(function () {
+    $(document).keypress(function (e) {
+        onKeyPress(e);
+    });
     var connectionString = $('#connection-string').val().toString();
     function onOpen(webSocket) {
         // @ts-ignore
