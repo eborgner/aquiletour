@@ -89,31 +89,30 @@ public class MainRouter {
 	}
 
 	private static Response routeRegistrationId(Path urlPath, Cookies cookies) {
-		Response response;
+		
 		String registrationId = MainPath.getAuthToken(urlPath);
 
-		Student student = MainControler.getStudentByRegistrationId(registrationId);
-		
-		String studentId = student.getId();
-
-		cookies.setStudentId(studentId);
-
 		Path pathWithoutToken  = MainPath.removeAuthToken(urlPath);
-		
-		response = new RedirectResponse(pathWithoutToken, cookies);
-		return response;
+
+		Student student = MainControler.getStudentByRegistrationId(registrationId);
+
+		if(student != null) {
+			String studentId = student.getId();
+			cookies.setStudentId(studentId);
+		}
+
+		return new RedirectResponse(pathWithoutToken, cookies);
 	}
 
 	private static Response routeTeacherToken(Path urlPath, Cookies cookies) {
-		Response response;
+
 		String authToken = MainPath.getAuthToken(urlPath);
 
 		cookies.setAuthToken(authToken);
 
 		Path pathWithoutToken  = MainPath.removeAuthToken(urlPath);
 		
-		response = new RedirectResponse(pathWithoutToken, cookies);
-		return response;
+		return new RedirectResponse(pathWithoutToken, cookies);
 	}
 
     public static Response routeAuthenticated(Path urlPath, Cookies cookies, String ipAddress,
