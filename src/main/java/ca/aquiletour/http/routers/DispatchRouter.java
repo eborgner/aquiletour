@@ -29,6 +29,7 @@ import ca.aquiletour.http.responses.Response;
 import ca.aquiletour.http.responses.TemplateResponse;
 import ca.aquiletour.http.responses.ValueResolver;
 import ca.aquiletour.settings.Login;
+import ca.aquiletour.settings.Pages;
 
 public class DispatchRouter {
 	
@@ -55,7 +56,7 @@ public class DispatchRouter {
 
 				cookies.setAuthToken(authToken);
 
-				response = new RedirectResponse(Paths.get(teacherId), cookies);
+				response = new RedirectResponse(Paths.get(teacherId, Pages.getInstance().getReady()), cookies);
 			}
         }
         

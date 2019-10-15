@@ -29,6 +29,7 @@ public class Pages extends Dictionary {
 
     protected String displayTickets;
     protected String myTicket;
+    protected String ready;
     protected String error;
     protected String login;
 
@@ -85,5 +86,14 @@ public class Pages extends Dictionary {
 	public void setLogin(String login) {
 		this.login = login;
 	}
+
+	public String getReady() {
+		return ready;
+	}
+
+	public void setReady(String ready) {
+		this.ready = ready;
+	}
+	
 
 }

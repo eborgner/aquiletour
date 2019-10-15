@@ -1,6 +1,6 @@
 {
         "title"                   : "À qui le tour?",
-        "whoAreYou"               : "Qui êtes-vous?",
+        "enterRegistrationId"     : "Entrez votre numéro DA (sans le 20)",
         "itsMe"                   : "C'est moi!",
         "itsNotMe"                : "ce n'est pas moi",
         "forWhichTeacher"         : "Pour quel prof?",

@@ -44,6 +44,7 @@ public class MainControler {
     private static final Path studentsPath = Paths.get(Lang.getInstance().getStudentsFile());
 
     private static Map<String, Student> studentById = new HashMap<>();
+    private static Map<String, Student> studentByRegistrationId = new HashMap<>();
     private static Map<String, Student> studentByAuthToken = new HashMap<>();
     private static Map<String, User> studentAsUserById = new HashMap<>();
     
@@ -69,9 +70,10 @@ public class MainControler {
 
         studentById = readUsers(studentsPath, new TypeToken<Map<String, Student>>(){});
         studentAsUserById = readUsers(studentsPath, new TypeToken<Map<String, User>>(){});
-        
+
         for(Student student : studentById.values()) {
         	studentByAuthToken.put(student.getAuthToken(), student);
+        	studentByRegistrationId.put(student.getRegistrationId(), student);
         }
     }
 
@@ -207,5 +209,13 @@ public class MainControler {
 
 	public static boolean doesStudentTokenExists(String authToken) {
 		return studentByAuthToken.containsKey(authToken);
+	}
+
+	public static boolean ifStudentExists(String studentId) {
+		return studentById.containsKey(studentId);
+	}
+
+	public static Student getStudentByRegistrationId(String registrationId) {
+		return studentByRegistrationId.get(registrationId);
 	}
 }

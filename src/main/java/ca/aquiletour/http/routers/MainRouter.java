@@ -51,17 +51,20 @@ public class MainRouter {
         
         if(MainPath.ifContainsToken(urlPath)) {
         	
-        	String authToken = MainPath.getAuthToken(urlPath);
+        	response = routeToken(urlPath, cookies);
 
-        	cookies.setAuthToken(authToken);
-        	
-        	Path pathWithoutToken  = MainPath.removeAuthToken(urlPath);
-        	
-        	response = new RedirectResponse(pathWithoutToken, cookies);
-        	
         }else if(userIsAuthenticated(cookies)) {
 
 	    	response = routeAuthenticated(urlPath, cookies, ipAddress, httpUserAgent);
+
+        }else if(MainPath.isPage(urlPath, Pages.getInstance().getReady())
+        		
+        		// && userHasToken
+        		
+        		){
+        	
+        	response = askStudentName(cookies);
+        	
 
         }else {
         	
@@ -71,6 +74,45 @@ public class MainRouter {
         
     	return response;
     }
+
+	private static Response routeToken(Path urlPath, Cookies cookies) {
+		
+		Response response = null;
+
+		String pageName = MainPath.getPageName(urlPath);
+
+		if(Pages.getInstance().getDisplayTickets().equals(pageName)) {
+
+			String authToken = MainPath.getAuthToken(urlPath);
+
+			cookies.setAuthToken(authToken);
+		
+			Path pathWithoutToken  = MainPath.removeAuthToken(urlPath);
+			
+			response = new RedirectResponse(pathWithoutToken, cookies);
+
+		}else if(Pages.getInstance().getReady().equals(pageName)) {
+
+			String registrationId = MainPath.getAuthToken(urlPath);
+
+			Student student = MainControler.getStudentByRegistrationId(registrationId);
+			
+			String studentId = student.getId();
+
+			cookies.setStudentId(studentId);
+		
+			Path pathWithoutToken  = MainPath.removeAuthToken(urlPath);
+			
+			response = new RedirectResponse(pathWithoutToken, cookies);
+			
+		}else {
+
+			response = DispatchRouter.redirectToRoot(cookies);
+
+		}
+
+		return response;
+	}
 
     public static Response routeAuthenticated(Path urlPath, Cookies cookies, String ipAddress,
             String httpUserAgent) {
@@ -152,6 +194,8 @@ public class MainRouter {
     	boolean userIsAuthenticated = false;
 
     	String authToken = cookies.getAuthToken();
+    	
+    	System.out.println(authToken  + "  " + cookies.getStudentId());
 
     	if(authToken != null) {
 
@@ -159,7 +203,8 @@ public class MainRouter {
 
     			userIsAuthenticated = true;
 
-    		}else if(authToken.equals(Login.getInstance().getStudentToken())) {
+    		}else if(authToken.equals(Login.getInstance().getStudentToken())
+    				&& MainControler.ifStudentExists(cookies.getStudentId())) {
 
     			userIsAuthenticated = true;
 

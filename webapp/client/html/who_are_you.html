@@ -20,7 +20,7 @@ along with aquiletour.  If not, see <https://www.gnu.org/licenses/> -->
     <div class="row">
         <div class="one-half column">
 
-            <h1>$whoAreYou</h1>
+            <h1>$enterRegistrationId</h1>
 
             <div class="ui-widget">
                 <input class="u-full-width" id="who-are-you" value="">
@@ -38,26 +38,14 @@ $(document).ready(function(){
     // remove what firefox auto-inserts
     $('#who-are-you').val("");
 
-    $('#button-its-me').attr('disabled', true);
-
-    var studentById = $studentById;
-
-    installAutocomplete('who-are-you', studentById, function(selectedId){
-
-            if(studentById[selectedId] !== undefined){
-
-                selectedStudentId = selectedId;
-                $('#button-its-me').attr('disabled', false);
-
-            }
-    });
-
 });
 
 $('#button-its-me').click(function(){
 
-    Cookies.set('studentId', selectedStudentId, {'Max-Age': maxCookieAge});
-    location.reload();
+    let registrationId = $('#who-are-you').val();
+
+    location = "/$teacherId/$ready/" + registrationId;
+
 
 });
 

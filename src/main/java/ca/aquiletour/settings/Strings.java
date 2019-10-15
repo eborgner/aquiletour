@@ -28,7 +28,7 @@ import ca.aquiletour.utils.Json;
 public class Strings extends Dictionary {
 
     protected String title;
-    protected String whoAreYou;
+    protected String enterRegistrationId;
     protected String itsMe;
     protected String itsNotMe;
     protected String forWhichTeacher;
@@ -77,14 +77,6 @@ public class Strings extends Dictionary {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getWhoAreYou() {
-        return whoAreYou;
-    }
-
-    public void setWhoAreYou(String whoAreYou) {
-        this.whoAreYou = whoAreYou;
     }
 
     public String getItsMe() {
@@ -246,5 +238,14 @@ public class Strings extends Dictionary {
 	public void setRetryNow(String retryNow) {
 		this.retryNow = retryNow;
 	}
+
+	public String getEnterRegistrationId() {
+		return enterRegistrationId;
+	}
+
+	public void setEnterRegistrationId(String enterRegistrationId) {
+		this.enterRegistrationId = enterRegistrationId;
+	}
+
 	
 }
