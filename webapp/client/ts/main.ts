@@ -15,45 +15,6 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with aquiletour.  If not, see <https://www.gnu.org/licenses/>
 
-const userByIdToAutocompleteSource = function(userById){
-
-    let source = []
-
-    for(let userId in userById){
-        let name = userById[userId].name + ' ' + userById[userId].surname;
-        let item = {value:userId, label:name};
-        source.push(item);
-    }
-
-    return source;
-}
-
-const installAutocomplete = function(inputId, userById, selectionListener){
-
-    const users = userByIdToAutocompleteSource(userById);
-
-    $('#'+inputId).autocomplete({
-        source: users,
-
-        focus: function(event, ui){
-            event.preventDefault();
-
-            selectionListener(ui.item.value)
-
-            $(this).val(ui.item.label);
-        },
-
-        select: function(event, ui){
-            event.preventDefault();
-
-            selectionListener(ui.item.value)
-
-            $(this).val(ui.item.label);
-        }
-    });
-}
-
-
 // 4 months
 const maxCookieAge:string = new String(60*60*24*30*4).toString();
 

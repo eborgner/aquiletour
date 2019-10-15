@@ -37,6 +37,14 @@ $(document).ready(function(){
     // XXX: to remove auto-inserted values
     $('#code').val("");
 
+    $('#code').keyup(function(e){
+        let enterKeyCode = 13;
+
+        if(e.keyCode == enterKeyCode){
+            $(this).trigger("click");
+        }
+    });
+
     $('#button-its-ok').click(function(e){
 
         let rawCode = $('#code').val();

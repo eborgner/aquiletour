@@ -19,7 +19,6 @@
 package ca.aquiletour.http.routers;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -57,15 +56,6 @@ public class MainRouter {
 
 	    	response = routeAuthenticated(urlPath, cookies, ipAddress, httpUserAgent);
 
-        }else if(MainPath.isPage(urlPath, Pages.getInstance().getReady())
-        		
-        		// && userHasToken
-        		
-        		){
-        	
-        	response = askStudentName(cookies);
-        	
-
         }else {
         	
         	response = DispatchRouter.redirectToRoot(cookies);
@@ -83,27 +73,11 @@ public class MainRouter {
 
 		if(Pages.getInstance().getDisplayTickets().equals(pageName)) {
 
-			String authToken = MainPath.getAuthToken(urlPath);
-
-			cookies.setAuthToken(authToken);
-		
-			Path pathWithoutToken  = MainPath.removeAuthToken(urlPath);
-			
-			response = new RedirectResponse(pathWithoutToken, cookies);
+			response = routeTeacherToken(urlPath, cookies);
 
 		}else if(Pages.getInstance().getReady().equals(pageName)) {
 
-			String registrationId = MainPath.getAuthToken(urlPath);
-
-			Student student = MainControler.getStudentByRegistrationId(registrationId);
-			
-			String studentId = student.getId();
-
-			cookies.setStudentId(studentId);
-		
-			Path pathWithoutToken  = MainPath.removeAuthToken(urlPath);
-			
-			response = new RedirectResponse(pathWithoutToken, cookies);
+			response = routeRegistrationId(urlPath, cookies);
 			
 		}else {
 
@@ -111,6 +85,34 @@ public class MainRouter {
 
 		}
 
+		return response;
+	}
+
+	private static Response routeRegistrationId(Path urlPath, Cookies cookies) {
+		Response response;
+		String registrationId = MainPath.getAuthToken(urlPath);
+
+		Student student = MainControler.getStudentByRegistrationId(registrationId);
+		
+		String studentId = student.getId();
+
+		cookies.setStudentId(studentId);
+
+		Path pathWithoutToken  = MainPath.removeAuthToken(urlPath);
+		
+		response = new RedirectResponse(pathWithoutToken, cookies);
+		return response;
+	}
+
+	private static Response routeTeacherToken(Path urlPath, Cookies cookies) {
+		Response response;
+		String authToken = MainPath.getAuthToken(urlPath);
+
+		cookies.setAuthToken(authToken);
+
+		Path pathWithoutToken  = MainPath.removeAuthToken(urlPath);
+		
+		response = new RedirectResponse(pathWithoutToken, cookies);
 		return response;
 	}
 
@@ -194,8 +196,6 @@ public class MainRouter {
     	boolean userIsAuthenticated = false;
 
     	String authToken = cookies.getAuthToken();
-    	
-    	System.out.println(authToken  + "  " + cookies.getStudentId());
 
     	if(authToken != null) {
 
@@ -203,8 +203,7 @@ public class MainRouter {
 
     			userIsAuthenticated = true;
 
-    		}else if(authToken.equals(Login.getInstance().getStudentToken())
-    				&& MainControler.ifStudentExists(cookies.getStudentId())) {
+    		}else if(authToken.equals(Login.getInstance().getStudentToken())) {
 
     			userIsAuthenticated = true;
 

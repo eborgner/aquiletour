@@ -38,14 +38,24 @@ $(document).ready(function(){
     // remove what firefox auto-inserts
     $('#who-are-you').val("");
 
+    $('#who-are-you').keyup(function(e){
+
+        let enterKeyCode = 13;
+
+        if(e.keyCode == enterKeyCode){
+            $(this).trigger("click");
+        }
+    });
+
 });
 
 $('#button-its-me').click(function(){
 
     let registrationId = $('#who-are-you').val();
 
-    location = "/$teacherId/$ready/" + registrationId;
+    registrationId = encodeURI(registrationId);
 
+    location = "/$teacherId/$ready/" + registrationId;
 
 });
 
