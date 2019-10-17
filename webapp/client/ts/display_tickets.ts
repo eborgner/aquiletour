@@ -17,6 +17,7 @@
 
 /// <reference path="main.ts"/>
 /// <reference path="websocket_common.ts"/>
+/// <reference path="notifications.ts"/>
 
 
 class MsgRegisterTeacherSocket extends OutgoingMessage {
@@ -37,12 +38,6 @@ class MsgCloseTicket extends TicketMessage {
         super(ticketId);
         this.authToken = authToken;
     }
-}
-
-function playNotificationSound(){
-
-    $('#notif').get(0).play();
-
 }
 
 function displayTicketList(ticketsList, socket){
@@ -219,7 +214,7 @@ $(document).ready(function(){
 
             if(message._type == "MsgDisplayNewTicket"){
                 appendTicket(message.ticket, webSocket);
-                playNotificationSound();
+                notifyNewTicket(message.ticket);
             }
 
             else if(message._type == "MsgDisplayComment"){
