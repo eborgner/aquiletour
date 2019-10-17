@@ -155,6 +155,9 @@ var MsgCloseTicket = /** @class */ (function (_super) {
     }
     return MsgCloseTicket;
 }(TicketMessage));
+function playNotificationSound() {
+    $('#notif').get(0).play();
+}
 function displayTicketList(ticketsList, socket) {
     clearTickets();
     for (var i = 0; i < ticketsList.length; i++) {
@@ -276,6 +279,7 @@ $(document).ready(function () {
         }
         if (message._type == "MsgDisplayNewTicket") {
             appendTicket(message.ticket, webSocket);
+            playNotificationSound();
         }
         else if (message._type == "MsgDisplayComment") {
             displayComment(message.ticketId, message.comment);
