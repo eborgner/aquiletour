@@ -1,5 +1,5 @@
-    ProxyPass /$teacherId/__wss__            wss://localhost:30002/         disablereuse=On
-    ProxyPassReverse /$teacherId/__wss__     wss://localhost:30002/         disablereuse=On
+    ProxyPass /$teacherId/__wss__            wss://localhost:$teacherWsPort/         disablereuse=On
+    ProxyPassReverse /$teacherId/__wss__     wss://localhost:$teacherWsPort/         disablereuse=On
 
-    ProxyPass /$teacherId          http://localhost:30001/mbergeron
-    ProxyPassReverse /$teacherId   http://localhost:30001/mbergeron
+    ProxyPass /$teacherId          http://localhost:$teacherHttpPort/mbergeron
+    ProxyPassReverse /$teacherId   http://localhost:$teacherHttpPort/mbergeron
