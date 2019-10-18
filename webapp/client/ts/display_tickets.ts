@@ -197,6 +197,8 @@ $(document).ready(function(){
 
     const connectionString = $('#connection-string').val().toString();
 
+    const ticketIdForNotifiedComment = new Set();
+
     function onOpen(webSocket:WebSocket){
 
                               // @ts-ignore
@@ -218,10 +220,15 @@ $(document).ready(function(){
 
             else if(message._type == "MsgDisplayComment"){
                 displayComment(message.ticketId, message.comment);
-                notifyNewComment(message.comment);
+
+                if(!ticketIdForNotifiedComment.has(message.ticketId)){
+                    ticketIdForNotifiedComment.add(message.ticketId);
+                    notifyNewComment(message.comment);
+                }
             }
 
             else if(message._type == "MsgRemoveDisplayedTicket"){
+                ticketIdForNotifiedComment.delete(message.ticketId);
                 removeTicket(message.ticketId);
             }
     }

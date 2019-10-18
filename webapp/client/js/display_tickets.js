@@ -300,6 +300,7 @@ $(document).ready(function () {
         onKeyPress(e);
     });
     var connectionString = $('#connection-string').val().toString();
+    var ticketIdForNotifiedComment = new Set();
     function onOpen(webSocket) {
         // @ts-ignore
         var authToken = Cookies.get('authToken');
@@ -316,9 +317,13 @@ $(document).ready(function () {
         }
         else if (message._type == "MsgDisplayComment") {
             displayComment(message.ticketId, message.comment);
-            notifyNewComment(message.comment);
+            if (!ticketIdForNotifiedComment.has(message.ticketId)) {
+                ticketIdForNotifiedComment.add(message.ticketId);
+                notifyNewComment(message.comment);
+            }
         }
         else if (message._type == "MsgRemoveDisplayedTicket") {
+            ticketIdForNotifiedComment["delete"](message.ticketId);
             removeTicket(message.ticketId);
         }
     }
