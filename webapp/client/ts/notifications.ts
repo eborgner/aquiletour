@@ -15,10 +15,14 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with aquiletour.  If not, see <https://www.gnu.org/licenses/>
 
+function notifyNewComment(message){
+
+    playNotificationSound();
+
+}
 
 function notifyNewTicket(ticket){
 
-    playNotificationSound();
     displayNotification(ticket);
 
 }

@@ -135,8 +135,10 @@ function openSocket(connectionString, onOpen, onMessage) {
 //
 // You should have received a copy of the GNU Affero General Public License
 // along with aquiletour.  If not, see <https://www.gnu.org/licenses/>
-function notifyNewTicket(ticket) {
+function notifyNewComment(message) {
     playNotificationSound();
+}
+function notifyNewTicket(ticket) {
     displayNotification(ticket);
 }
 function playNotificationSound() {
@@ -316,6 +318,7 @@ $(document).ready(function () {
         }
         else if (message._type == "MsgDisplayComment") {
             displayComment(message.ticketId, message.comment);
+            notifyNewComment(message.comment);
         }
         else if (message._type == "MsgRemoveDisplayedTicket") {
             removeTicket(message.studentId);

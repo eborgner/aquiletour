@@ -219,6 +219,7 @@ $(document).ready(function(){
 
             else if(message._type == "MsgDisplayComment"){
                 displayComment(message.ticketId, message.comment);
+                notifyNewComment(message.comment);
             }
 
             else if(message._type == "MsgRemoveDisplayedTicket"){
