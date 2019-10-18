@@ -155,8 +155,7 @@ function modifyTicket(ticket){
 
 function removeTicket(studentId){
 
-    var shouldDecrementPosition = false;
-    var trToRemove = null;
+    let trToRemove = null;
 
     $('#tickets-tbody>tr').each(function(i, tr){
             if(tr.id == studentId){
@@ -223,6 +222,7 @@ $(document).ready(function(){
             }
 
             else if(message._type == "MsgRemoveDisplayedTicket"){
+                console.log(message.studentId);
                 removeTicket(message.studentId);
             }
     }
