@@ -14,19 +14,22 @@
 //
 // You should have received a copy of the GNU Affero General Public License
 // along with aquiletour.  If not, see <https://www.gnu.org/licenses/>
-function notifyNewComment(message) {
+function notifyNewComment(studentName, comment) {
+    var message = studentName + ": " + comment;
     playNotificationSound();
+    displayNotification(message);
 }
 function notifyNewTicket(ticket) {
-    displayNotification(ticket);
+    var student = ticket.studentAsUser;
+    var message = student.name + " " + student.surname;
+    displayNotification(message);
 }
 function playNotificationSound() {
     var audioElm = $('#notif').get(0);
     audioElm.play();
 }
-function displayNotification(ticket) {
-    var student = ticket.studentAsUser;
-    new Notification(student.name + " " + student.surname);
+function displayNotification(message) {
+    new Notification(message);
 }
 function requestNotificationPermission() {
     Notification.requestPermission(function (permission) {

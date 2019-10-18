@@ -133,6 +133,11 @@ function buildTicketHtml(position, ticket){
 
 }
 
+function getStudentName(ticketId){
+    let studentNameElm = $('#'+ticketId).children('.name');
+    return studentNameElm.text();
+}
+
 function displayComment(ticketId, comment){
     let commentTd = $('#'+ticketId).children('.comment');
     commentTd.css('opacity', '0');
@@ -219,11 +224,17 @@ $(document).ready(function(){
             }
 
             else if(message._type == "MsgDisplayComment"){
-                displayComment(message.ticketId, message.comment);
+                const comment = message.comment;
+                const ticketId = message.ticketId;
 
-                if(!ticketIdForNotifiedComment.has(message.ticketId)){
-                    ticketIdForNotifiedComment.add(message.ticketId);
-                    notifyNewComment(message.comment);
+                displayComment(ticketId, comment);
+
+                if(!ticketIdForNotifiedComment.has(ticketId)){
+                    ticketIdForNotifiedComment.add(ticketId);
+
+                    let studentName = getStudentName(ticketId);
+
+                    notifyNewComment(studentName, comment);
                 }
             }
 

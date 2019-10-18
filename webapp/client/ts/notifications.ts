@@ -15,15 +15,20 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with aquiletour.  If not, see <https://www.gnu.org/licenses/>
 
-function notifyNewComment(message){
+function notifyNewComment(studentName, comment){
+
+    const message = studentName + ": " + comment;
 
     playNotificationSound();
+    displayNotification(message);
 
 }
 
 function notifyNewTicket(ticket){
+    const student = ticket.studentAsUser;
+    const message = student.name + " " + student.surname;
 
-    displayNotification(ticket);
+    displayNotification(message);
 
 }
 
@@ -34,9 +39,8 @@ function playNotificationSound(){
 
 }
 
-function displayNotification(ticket){
-    const student = ticket.studentAsUser;
-    new Notification(student.name + " " + student.surname);
+function displayNotification(message){
+    new Notification(message);
 }
 
 function requestNotificationPermission(){

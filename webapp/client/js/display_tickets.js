@@ -134,19 +134,22 @@ function openSocket(connectionString, onOpen, onMessage) {
 //
 // You should have received a copy of the GNU Affero General Public License
 // along with aquiletour.  If not, see <https://www.gnu.org/licenses/>
-function notifyNewComment(message) {
+function notifyNewComment(studentName, comment) {
+    var message = studentName + ": " + comment;
     playNotificationSound();
+    displayNotification(message);
 }
 function notifyNewTicket(ticket) {
-    displayNotification(ticket);
+    var student = ticket.studentAsUser;
+    var message = student.name + " " + student.surname;
+    displayNotification(message);
 }
 function playNotificationSound() {
     var audioElm = $('#notif').get(0);
     audioElm.play();
 }
-function displayNotification(ticket) {
-    var student = ticket.studentAsUser;
-    new Notification(student.name + " " + student.surname);
+function displayNotification(message) {
+    new Notification(message);
 }
 function requestNotificationPermission() {
     Notification.requestPermission(function (permission) {
@@ -258,6 +261,10 @@ function buildTicketHtml(position, ticket) {
     rowHtml += '</tr>';
     return rowHtml;
 }
+function getStudentName(ticketId) {
+    var studentNameElm = $('#' + ticketId).children('.name');
+    return studentNameElm.text();
+}
 function displayComment(ticketId, comment) {
     var commentTd = $('#' + ticketId).children('.comment');
     commentTd.css('opacity', '0');
@@ -316,10 +323,13 @@ $(document).ready(function () {
             notifyNewTicket(message.ticket);
         }
         else if (message._type == "MsgDisplayComment") {
-            displayComment(message.ticketId, message.comment);
-            if (!ticketIdForNotifiedComment.has(message.ticketId)) {
-                ticketIdForNotifiedComment.add(message.ticketId);
-                notifyNewComment(message.comment);
+            var comment = message.comment;
+            var ticketId = message.ticketId;
+            displayComment(ticketId, comment);
+            if (!ticketIdForNotifiedComment.has(ticketId)) {
+                ticketIdForNotifiedComment.add(ticketId);
+                var studentName = getStudentName(ticketId);
+                notifyNewComment(studentName, comment);
             }
         }
         else if (message._type == "MsgRemoveDisplayedTicket") {
