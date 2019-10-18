@@ -70,8 +70,6 @@ function reconnectAfterDelay(connectionString,
 
         clearTimeout(reconnectTimer);
 
-        console.log(delayInSeconds);
-
         $('#reconnecting-in').text(delayInSeconds);
 
         if(delayInSeconds > 0){

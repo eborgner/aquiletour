@@ -60,7 +60,6 @@ function reconnect(connectionString, onOpen, onMessage) {
 function reconnectAfterDelay(connectionString, onOpen, onMessage, delayInSeconds) {
     var reconnectTimer = setTimeout(function () {
         clearTimeout(reconnectTimer);
-        console.log(delayInSeconds);
         $('#reconnecting-in').text(delayInSeconds);
         if (delayInSeconds > 0) {
             var remainingDelay = delayInSeconds - stepDelayInSeconds;
