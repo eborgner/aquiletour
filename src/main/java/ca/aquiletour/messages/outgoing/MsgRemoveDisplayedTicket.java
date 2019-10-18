@@ -22,11 +22,11 @@ import ca.aquiletour.messages.Message;
 
 public class MsgRemoveDisplayedTicket extends Message {
 	
-	protected String studentId;
+	protected String ticketId;
 	
-	public MsgRemoveDisplayedTicket(String studentId) {
+	public MsgRemoveDisplayedTicket(String ticketId) {
 		super();
-		this.studentId = studentId;
+		this.ticketId = ticketId;
 	}
 
 }

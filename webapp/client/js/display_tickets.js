@@ -271,10 +271,10 @@ function modifyTicket(ticket) {
     var ticketHtml = buildTicketHtml(position, ticket);
     ticketElm.replaceWith(ticketHtml);
 }
-function removeTicket(studentId) {
+function removeTicket(ticketId) {
     var trToRemove = null;
     $('#tickets-tbody>tr').each(function (i, tr) {
-        if (tr.id == studentId) {
+        if (tr.id == ticketId) {
             trToRemove = tr;
         }
     });
@@ -319,8 +319,7 @@ $(document).ready(function () {
             notifyNewComment(message.comment);
         }
         else if (message._type == "MsgRemoveDisplayedTicket") {
-            console.log(message.studentId);
-            removeTicket(message.studentId);
+            removeTicket(message.ticketId);
         }
     }
     openSocket(connectionString, onOpen, onMessage);

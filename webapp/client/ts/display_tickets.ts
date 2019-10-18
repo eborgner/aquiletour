@@ -153,12 +153,12 @@ function modifyTicket(ticket){
 
 }
 
-function removeTicket(studentId){
+function removeTicket(ticketId){
 
     let trToRemove = null;
 
     $('#tickets-tbody>tr').each(function(i, tr){
-            if(tr.id == studentId){
+            if(tr.id == ticketId){
                 trToRemove = tr;
             }
     });
@@ -222,8 +222,7 @@ $(document).ready(function(){
             }
 
             else if(message._type == "MsgRemoveDisplayedTicket"){
-                console.log(message.studentId);
-                removeTicket(message.studentId);
+                removeTicket(message.ticketId);
             }
     }
 
