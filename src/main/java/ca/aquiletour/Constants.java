@@ -55,6 +55,9 @@ public class Constants {
     private static String LANG_DIRNAME = "lang";
     public static Path LANG_DIR;
 
+    private static String SSL_DIRNAME = "ssl";
+    public static Path SSL_DIR;
+
     private static String TICKETS_DIRNAME;
     public static Path TICKETS_DIR;
 
@@ -93,7 +96,6 @@ public class Constants {
                 EXECUTING_AS_JAR = false;
 
                 String rootPath = pathToMain.replaceFirst(String.format("/%s/.*$", APP_DIRNAME), "");
-                
                 ROOT_DIR = Paths.get(rootPath, APP_DIRNAME, WEBAPP_DIRNAME);
 
             }
@@ -110,6 +112,7 @@ public class Constants {
     	SERVER_DIR = Paths.get(SERVER_DIRNAME);
     	CONF_DIR = Paths.get(SERVER_DIR.toString(), CONF_DIRNAME);
         LANG_DIR = Paths.get(CONF_DIR.toString(), LANG_DIRNAME);
+        SSL_DIR = Paths.get(SERVER_DIR.toString(), SSL_DIRNAME);
         CLIENT_DIR = Paths.get(CLIENT_DIRNAME);
         HTML_DIR = Paths.get(CLIENT_DIR.toString(), HTML_DIRNAME);
         DEFAULT_TEMPLATE_PATH = Paths.get(HTML_DIR.toString(), DEFAULT_TEMPLATE_FILENAME);

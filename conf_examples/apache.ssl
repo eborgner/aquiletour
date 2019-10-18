@@ -1,0 +1,13 @@
+ServerName aquiletour.ca:443
+SSLProxyEngine On
+
+ProxyPass /wss wss://localhost:30002/
+ProxyPassReverse /wss wss://localhost:30002/
+
+# teacher
+ProxyPass /mbergeron http://localhost:30001/mbergeron
+ProxyPassReverse /mbergeron http://localhost:30001/mbergeron
+
+# disptach
+ProxyPass / http://localhost:30001/
+ProxyPassReverse / http://localhost:30001/

@@ -22,3 +22,4 @@ server_scripts_dir=$(dirname $(readlink -f $0))
 ###################
 
 java -cp "$webapp_dir/aquiletour.jar:$server_dir/libs/*" ca.aquiletour.Main
+#java -Djavax.net.debug=all -cp "$webapp_dir/aquiletour.jar:$server_dir/libs/*" ca.aquiletour.Main
