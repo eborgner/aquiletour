@@ -45,3 +45,22 @@ along with aquiletour.  If not, see <https://www.gnu.org/licenses/> -->
 
 <script src="/$teacherId/__static__/js/user_ticket.js"></script>
 
+<script>
+
+$(document).ready(function(){
+
+    $('#comment').keyup(function(e){
+
+        let enterKeyCode = 13;
+
+        if(e.keyCode == enterKeyCode){
+            $('#button-add-comment').trigger("click");
+        }
+    });
+
+});
+
+</script>
+
+
+
