@@ -217,16 +217,17 @@ function appendTicket(ticket, socket) {
     // @ts-ignore FIXME: how to cast??
     var position = trCollection.size() + 1;
     var ticketHtml = buildTicketHtml(position, ticket);
-    var newItem = $('#tickets-tbody').append(ticketHtml);
-    $('#' + ticket.id).click(function () {
+    $('#tickets-tbody').append(ticketHtml);
+    var newItem = $('#' + ticket.id);
+    $(newItem).click(function () {
         // @ts-ignore
         var authToken = Cookies.get('authToken');
         var msgCloseTicket = new MsgCloseTicket(authToken, ticket.id);
         msgCloseTicket.send(socket);
     });
     recomputePositions();
-    newItem.css('opacity', '0');
-    newItem.animate({ opacity: 1 }, "slow");
+    $(newItem).css('opacity', '0');
+    $(newItem).animate({ opacity: 1 }, "slow");
 }
 var currentFontSizePercent = 100;
 var fontSizeIncrement = 30;

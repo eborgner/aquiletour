@@ -72,9 +72,11 @@ function appendTicket(ticket, socket){
 
     let ticketHtml = buildTicketHtml(position, ticket);
 
-    let newItem = $('#tickets-tbody').append(ticketHtml);
+    $('#tickets-tbody').append(ticketHtml);
 
-    $('#' + ticket.id).click(function(){
+    let newItem = $('#' + ticket.id);
+
+    $(newItem).click(function(){
 
                             // @ts-ignore
             const authToken = Cookies.get('authToken');
@@ -86,8 +88,8 @@ function appendTicket(ticket, socket){
 
     recomputePositions();
 
-    newItem.css('opacity','0');
-    newItem.animate({opacity:1}, "slow");
+    $(newItem).css('opacity','0');
+    $(newItem).animate({opacity:1}, "slow");
 
 }
 
